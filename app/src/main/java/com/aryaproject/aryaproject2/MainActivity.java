@@ -102,3 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 }
+
+/*
+ * 18th September 2K18,
+ * 22:57,
+ * Working SignUp, Login, Saving all attributes in Database.
+ *
+ */
