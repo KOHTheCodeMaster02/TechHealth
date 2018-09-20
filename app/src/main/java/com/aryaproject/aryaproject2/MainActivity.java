@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     progressBar.setVisibility(View.GONE);
 
                     // --
-                    HomePageActivity.cEmail = email;
+                    HomePageActivity.eEmail = email;
                     //tempEmail = email;
 
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);

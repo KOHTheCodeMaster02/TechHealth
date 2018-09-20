@@ -120,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), "Registration Successful",
                             Toast.LENGTH_SHORT).show();
 
-                    HomePageActivity.cEmail = email;
+                    HomePageActivity.eEmail = email;
                     //tempEmail = email;
 
                     // Ashwin Function.

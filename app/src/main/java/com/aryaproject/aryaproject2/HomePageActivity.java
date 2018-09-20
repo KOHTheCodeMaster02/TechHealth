@@ -33,7 +33,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private String folderName = "abc";
     private String currentFileName = "null";
 
-    static String cEmail = "no email";
+    static String eEmail = "no email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         storage = FirebaseStorage.getInstance();
 
-        currentEmail = HomePageActivity.cEmail;
+        currentEmail = HomePageActivity.eEmail;
         Log.d("CurrentEmail", currentEmail);
         folderName = ashwin(currentEmail);
         Log.d("Ashwin", folderName);
@@ -59,20 +59,27 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             //koh7();
           uploadFile("recent_csv.txt");   //  working.
           uploadFile("userid.txt");       //  working.
+
+        uploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
+        uploadFileUserCsv(ashwin(HomePageActivity.eEmail));
+
+
+        //downloadFile();
+        //uploadFile("c.txt");
           //downloadFile();   //  working.
 
 
     }
 
     // Kaam kar raha hai jo wahi hai ye. ~Asish Dada.
-    private File readAndWriteFiles(String tempFileName){
+    private File readAndWriteFilesWithExtension(String tempFileName){
         //koh6();
         File dir = getFilesDir();
         File file = new File(dir, tempFileName);
         //File f = new File()
         try {
 
-            String str = ashwin( HomePageActivity.cEmail );
+            String str = ashwin( HomePageActivity.eEmail);
             if(tempFileName.equals("recent_csv.txt"))
                 str += ".csv";
 
@@ -132,10 +139,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         return dateFormat.format(date);
     }
 
-    //  Working.
+    //  Working.    for Temp folder.
     private void uploadFile(String tempFileName){
 
-        readAndWriteFiles(tempFileName);
+        readAndWriteFilesWithExtension(tempFileName);
 
         File dir = getFilesDir();
         File file = new File(dir, tempFileName);
@@ -155,6 +162,74 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    private void uploadFileUserCsv(String tempFileName){
+
+        readAndWriteFiles(tempFileName);
+
+        File dir = getFilesDir();
+        File file = new File(dir, tempFileName);
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference river = storageRef.child("users/" + tempFileName + "/" + currentFileName + ".csv");
+        UploadTask uploadTask = river.putFile(file2);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                msg1();
+            }
+        });
+    }
+
+    //  Called when uploading for users folder.
+    private void readAndWriteFiles(String tempFileName) {
+        //koh6();
+        File dir = getFilesDir();
+        File file = new File(dir, tempFileName);
+        //File f = new File()
+        try {
+            // Handle Csv file properly ASAP!!!.
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter.write("healthy");
+            bufferedWriter.close();
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while((line = bufferedReader.readLine() ) != null ){
+                Log.d("aq1", line);
+            }
+            bufferedReader.close();
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("aq1", "error!");
+            Log.d("aq1", file.getPath());
+        }
+
+    }
+
+
+    private void uploadFileUserTxt(String tempFileName, String currentTime){
+        //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
+        readAndWriteFiles(tempFileName);
+
+        File dir = getFilesDir();
+        File file = new File(dir, tempFileName);
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference river = storageRef.child("users/" + tempFileName + "/" + currentFileName + ".txt");
+        UploadTask uploadTask = river.putFile(file2);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                msg1();
+            }
+        });
+    }
+
     //  Download Working.
     private void downloadFile(){
 
@@ -163,7 +238,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         StorageReference isLandRef = storageRef.child("temp/userid.txt");
 
         File dir = getFilesDir();
-        File file = new File(dir, "userid.txt");
+        File file = new File(dir, "c.txt");
         isLandRef.getFile(file);
 
     }
