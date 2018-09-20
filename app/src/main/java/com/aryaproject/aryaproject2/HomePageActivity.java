@@ -1,5 +1,6 @@
 package com.aryaproject.aryaproject2;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,15 +12,24 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -64,6 +74,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         currentFileName = ashwinDate();
 
+        as2();
+        //as1();
+        //File newFile = koh7();
+
+        //koh6();
         //koh5();
         //koh4();
         //koh3();
@@ -73,6 +88,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(currentFileName + ".txt");
         stream = getResources().openRawResource(R.raw.healthstate);
+
+
         uploadTask = storageReference.putStream(stream);
 
         storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(currentFileName + ".csv");
@@ -94,7 +111,101 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+    }
 
+
+private void koh9(){
+    try {
+        FileOutputStream fos = new FileOutputStream(koh7());
+
+//        how to upload a file to a url using java
+
+//        String str = read
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+
+}
+    //  Asish Fav. nhi h
+
+    private void koh8(){
+
+        URLConnection urlConnection = null;
+        try{
+            // file leni hai
+            String str = "hello";
+            FileOutputStream fos = new FileOutputStream(koh7());
+            byte[] b = str.getBytes();
+//https://storage.googleapis.com/aryaproject2-7252e.appspot.com/users/1/2018-09-263_23-15-75.txt
+            URL url = new URL("https://storage.googleapis.com/aryaproject2-7252e.appspot.com/users/1/2018-09-263_23-15-75.txt");
+            urlConnection = url.openConnection();
+            urlConnection.setDoOutput(true);
+            urlConnection.setDoInput(true);
+            if(urlConnection instanceof HttpsURLConnection){
+                ((HttpsURLConnection) urlConnection ).setRequestMethod("PUT");
+                ((HttpsURLConnection) urlConnection ).setRequestProperty("Content-type", "text/plain");
+                ((HttpsURLConnection) urlConnection ).connect();
+            }
+            BufferedOutputStream bos = new BufferedOutputStream(urlConnection.getOutputStream());
+            bos.write(b);
+            fos.close();
+
+
+
+            bos.close();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private File koh7(){
+        //koh6();
+        File dir = getFilesDir();
+        File file = new File(dir, "a1.txt");
+        //File f = new File()
+        try {
+
+            String str = "hello";
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter.write(str);
+            bufferedWriter.close();
+/*
+            //BufferedReader bufferedReader = new BufferedReader(new FileReader("E:\\New Text Document.txt"));
+            String line = null;
+            while((line = bufferedReader.readLine() ) != null ){
+                Log.d("aq1", line);
+            }*/
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("aq1", "error!");
+            Log.d("aq1", file.getPath());
+        }
+
+        return file;
+    }
+
+    private void koh6() {
+        Formatter x = new Formatter();
+        File d = getFilesDir();
+        Log.d("q1", d.getPath());
+        try {
+            x = new Formatter("a1.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+
+            Log.d("q12", e.getMessage());
+        }
+        String data = "hello";
+        x.format(data);
+        x.close();
 
     }
 
@@ -259,6 +370,35 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 //            out1.close();
 
     }
+    //  Upload Code Working
+
+
+    private void as2(){
+
+        File dir = getFilesDir();
+        File file = new File(dir, "a1.txt");
+
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+
+        StorageReference river = storageRef.child("users/1/a2.txt");
+        UploadTask uploadTask = river.putFile(file2);
+
+    }
+
+
+    private void as1() throws IOException {
+        URL u1 = new URL("https://storage.googleapis.com/aryaproject2-7252e.appspot.com/users/1/2018-09-263_23-15-75.txt");
+        URLConnection u2 = u1.openConnection();
+        InputStream is = u2.getInputStream();
+        int i;
+        while( (i = is.read()) != -1){
+            Log.d("q1", String.valueOf((char) i));
+        }
+
+    }
+
 }
 
 /*
@@ -269,3 +409,38 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
  * ~K.O.H..!! ^__^
  *
  */
+
+
+/*
+    Aims:
+    1. Upload CSV File.
+    2. Health State File Upload.
+    3. Upload Name of CSV File & Userid in text files.
+
+    4. Download Health State file.
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
