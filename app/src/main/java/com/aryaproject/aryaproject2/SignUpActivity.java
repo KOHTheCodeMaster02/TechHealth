@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +18,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.InputStream;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +32,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     ProgressBar progressBar;
 
     DatabaseReference databaseUser;
+
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    InputStream stream;
+    UploadTask uploadTask;
 
     private FirebaseAuth mAuth;
 
@@ -112,6 +123,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(getApplicationContext(), "Registration Successful",
                             Toast.LENGTH_SHORT).show();
 
+                    // Ashwin Function.
+                    String folderName = ashwin(email);
+                    Log.d("Ashwin", folderName);
+
+
+                    storage = FirebaseStorage.getInstance();
+                    storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/temp/").child(folderName + ".txt");
+                    stream = getResources().openRawResource(R.raw.ab);
+                    uploadTask = storageReference.putStream(stream);
+
+
                     Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     progressBar.setVisibility(View.GONE);
@@ -149,6 +171,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+    }
+
+    private String ashwin(String email) {
+
+        //String str1 = email.substring(0, email.length())
+        //String str = "@";
+        int a = email.indexOf('@');
+        String str = email.substring(0, a);
+
+        return str;
     }
 
     @Override

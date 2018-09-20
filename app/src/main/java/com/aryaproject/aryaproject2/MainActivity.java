@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     FirebaseAuth firebaseAuth;
 
+    HomePageActivity homePageActivity = new HomePageActivity();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void userLogin() {
 
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if(email.isEmpty()){
@@ -72,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
+
+                    // --
+                    homePageActivity.a11(email);
+
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     progressBar.setVisibility(View.GONE);

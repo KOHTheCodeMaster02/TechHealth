@@ -2,6 +2,7 @@ package com.aryaproject.aryaproject2;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     StorageReference storageReference;
     InputStream stream;
     UploadTask uploadTask;
+    private String currentEmail = "asa@afa.no";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +44,18 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private void sync1() {
 
         storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/test1").child("test.txt");
+
+
+        String folderName = ashwin(currentEmail);
+        Log.d("Ashwin", folderName);
+
+        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(folderName + ".txt");
         stream = getResources().openRawResource(R.raw.ab);
         uploadTask = storageReference.putStream(stream);
+//
+//        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + currentEmail + "/").child(folderName + ".csv");
+//        stream = getResources().openRawResource(R.raw.ab);
+//        uploadTask = storageReference.putStream(stream);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -67,6 +79,23 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 sync1();
                 break;
         }
+    }
+
+    private String obtaintCurrentEmail(String str){
+        return str;
+    }
+
+    public void a11(String str){
+        currentEmail = str;
+    }
+    private String ashwin(String email) {
+
+        //String str1 = email.substring(0, email.length())
+        //String str = "@";
+        int a = email.indexOf('@');
+        String str = email.substring(0, a);
+
+        return str;
     }
 }
 
