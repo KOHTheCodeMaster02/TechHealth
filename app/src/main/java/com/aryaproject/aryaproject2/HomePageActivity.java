@@ -13,10 +13,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +76,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         currentFileName = ashwinDate();
 
-        as2();
+        //  uploadFile();   //  working.
+        //  downloadFile();   //  working.
+
+        //as3();
+        //as2();
         //as1();
         //File newFile = koh7();
 
@@ -167,20 +173,19 @@ private void koh9(){
     private File koh7(){
         //koh6();
         File dir = getFilesDir();
-        File file = new File(dir, "a1.txt");
+        File file = new File(dir, "a3.txt");
         //File f = new File()
         try {
 
-            String str = "hello";
+            String str = "hello again! :P";
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(str);
             bufferedWriter.close();
-/*
-            //BufferedReader bufferedReader = new BufferedReader(new FileReader("E:\\New Text Document.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = null;
             while((line = bufferedReader.readLine() ) != null ){
-                Log.d("aq1", line);
-            }*/
+                Log.d("q1", line);
+            }
 
         } catch (IOException e){
             e.printStackTrace();
@@ -370,19 +375,33 @@ private void koh9(){
 //            out1.close();
 
     }
+
+
+    private void as3(){
+
+        StorageReference storageRef = storage.getReference();
+        StorageReference isLandRef = storageRef.child("users/1/a42.txt");
+
+        File dir = getFilesDir();
+        File file = new File(dir, "a22.txt");
+        isLandRef.getFile(file);
+
+    }
+
     //  Upload Code Working
 
 
     private void as2(){
 
-        File dir = getFilesDir();
-        File file = new File(dir, "a1.txt");
+        koh7();
 
+        File dir = getFilesDir();
+        File file = new File(dir, "a22.txt");
         Uri file2 = Uri.fromFile(file);
         StorageReference storageRef = storage.getReference();
 
 
-        StorageReference river = storageRef.child("users/1/a2.txt");
+        StorageReference river = storageRef.child("users/1/a22.txt");
         UploadTask uploadTask = river.putFile(file2);
 
     }
@@ -398,6 +417,37 @@ private void koh9(){
         }
 
     }
+
+
+    //  Working.
+    private void uploadFile(){
+
+        koh7();
+
+        File dir = getFilesDir();
+        File file = new File(dir, "a22.txt");
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+
+        StorageReference river = storageRef.child("users/1/a22.txt");
+        UploadTask uploadTask = river.putFile(file2);
+
+    }
+
+
+    //  Download Working.
+    private void downloadFile(){
+
+        StorageReference storageRef = storage.getReference();
+        StorageReference isLandRef = storageRef.child("users/1/a42.txt");
+
+        File dir = getFilesDir();
+        File file = new File(dir, "a22.txt");
+        isLandRef.getFile(file);
+
+    }
+
 
 }
 
