@@ -12,26 +12,21 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
-
-import javax.net.ssl.HttpsURLConnection;
 
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -77,7 +72,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         currentFileName = ashwinDate();
 
             //koh7();
-          uploadFile();   //  working.
+          uploadFile("recent_csv.txt");   //  working.
           //downloadFile();   //  working.
 
         //as3();
@@ -115,9 +110,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+/*
 private void koh9(){
     try {
-        FileOutputStream fos = new FileOutputStream(koh7());
+        FileOutputStream fos = new FileOutputStream(koh7("fw"));
 
 //        how to upload a file to a url using java
 
@@ -127,7 +123,8 @@ private void koh9(){
     }
 
 }
-    //  Asish Fav. nhi h
+*/
+    /*//  Asish Fav. nhi h
 
     private void koh8(){
 
@@ -135,7 +132,7 @@ private void koh9(){
         try{
             // file leni hai
             String str = "hello";
-            FileOutputStream fos = new FileOutputStream(koh7());
+            FileOutputStream fos = new FileOutputStream(koh7(""));
             byte[] b = str.getBytes();
 //https://storage.googleapis.com/aryaproject2-7252e.appspot.com/users/1/2018-09-263_23-15-75.txt
             URL url = new URL("https://storage.googleapis.com/aryaproject2-7252e.appspot.com/users/1/2018-09-263_23-15-75.txt");
@@ -163,16 +160,19 @@ private void koh9(){
         }
 
     }
+*/
 
-
-    private File koh7(){
+    private File koh7(String tempFileName){
         //koh6();
         File dir = getFilesDir();
-        File file = new File(dir, "userid.txt");
+        File file = new File(dir, tempFileName);
         //File f = new File()
         try {
 
-            String str = "asish";
+            String str = ashwin( HomePageActivity.cEmail );
+            if(tempFileName.equals("recent_csv.txt"))
+                str += ".csv";
+
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(str);
             bufferedWriter.close();
@@ -389,7 +389,7 @@ private void koh9(){
 
     private void as2(){
 
-        koh7();
+        koh7("");
 
         File dir = getFilesDir();
         File file = new File(dir, "a22.txt");
@@ -416,17 +416,17 @@ private void koh9(){
 
 
     //  Working.
-    private void uploadFile(){
+    private void uploadFile(String tempFileName){
 
-        koh7();
+        koh7(tempFileName);
 
         File dir = getFilesDir();
-        File file = new File(dir, "userid.txt");
+        File file = new File(dir, tempFileName);
         Uri file2 = Uri.fromFile(file);
         StorageReference storageRef = storage.getReference();
 
 
-        StorageReference river = storageRef.child("temp/userid.txt");
+        StorageReference river = storageRef.child("temp/" + tempFileName);
         UploadTask uploadTask = river.putFile(file2);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
