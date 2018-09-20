@@ -163,3 +163,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 }
+
+
+/*
+ * Status: Working
+ * Task: Register New User into Firebase Database.
+ * Next Activity: HomePageActivity.
+ * Last Modified: 20th September, 0801,
+ * Developed By,
+ * ~K.O.H..!! ^__^
+ *
+ */

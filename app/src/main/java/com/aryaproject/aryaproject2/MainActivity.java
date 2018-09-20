@@ -104,8 +104,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 
 /*
- * 18th September 2K18,
- * 22:57,
- * Working SignUp, Login, Saving all attributes in Database.
+ * Status: Working
+ * Task: Display Login Form, Create New Account Button.
+ * Next Activity: HomePageActivity (Login) | SignUpActivity (Create New Account).
+ * Last Modified: 20th September, 0805,
+ * Developed By,
+ * ~K.O.H..!! ^__^
  *
  */

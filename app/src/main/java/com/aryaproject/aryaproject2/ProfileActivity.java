@@ -11,3 +11,13 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
     }
 }
+
+/*
+ * Status: Working
+ * Task: Empty Activity.
+ * Next Activity: None.
+ * Last Modified: 20th September, 0806,
+ * Developed By,
+ * ~K.O.H..!! ^__^
+ *
+ */

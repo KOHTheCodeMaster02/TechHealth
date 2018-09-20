@@ -38,3 +38,13 @@ public class User {
         //this.email = email;
     }
 }
+
+/*
+ * Status: Working
+ * Task: Collect User Details in a User Class object.
+ * Next Activity: None.
+ * Last Modified: 20th September, 0805,
+ * Developed By,
+ * ~K.O.H..!! ^__^
+ *
+ */
