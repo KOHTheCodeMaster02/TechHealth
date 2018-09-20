@@ -76,8 +76,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         currentFileName = ashwinDate();
 
-        //  uploadFile();   //  working.
-        //  downloadFile();   //  working.
+            //koh7();
+          uploadFile();   //  working.
+          //downloadFile();   //  working.
 
         //as3();
         //as2();
@@ -91,11 +92,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         //koh2();
         //koh1();
         //hcma1();
-
+/*
         storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(currentFileName + ".txt");
-        stream = getResources().openRawResource(R.raw.healthstate);
+        stream = getResources().openRawResource(R.raw.healthstate);*/
 
-
+/*
         uploadTask = storageReference.putStream(stream);
 
         storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(currentFileName + ".csv");
@@ -108,14 +109,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/temp/").child("userid.txt");
         stream = getResources().openRawResource(R.raw.userid);
-        uploadTask = storageReference.putStream(stream);
+        uploadTask = storageReference.putStream(stream);*/
 
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                msg1();
-            }
-        });
 
     }
 
@@ -173,19 +168,20 @@ private void koh9(){
     private File koh7(){
         //koh6();
         File dir = getFilesDir();
-        File file = new File(dir, "a3.txt");
+        File file = new File(dir, "userid.txt");
         //File f = new File()
         try {
 
-            String str = "hello again! :P";
+            String str = "asish";
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(str);
             bufferedWriter.close();
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = null;
             while((line = bufferedReader.readLine() ) != null ){
-                Log.d("q1", line);
+                Log.d("aq1", line);
             }
+            bufferedReader.close();
 
         } catch (IOException e){
             e.printStackTrace();
@@ -425,25 +421,32 @@ private void koh9(){
         koh7();
 
         File dir = getFilesDir();
-        File file = new File(dir, "a22.txt");
+        File file = new File(dir, "userid.txt");
         Uri file2 = Uri.fromFile(file);
         StorageReference storageRef = storage.getReference();
 
 
-        StorageReference river = storageRef.child("users/1/a22.txt");
+        StorageReference river = storageRef.child("temp/userid.txt");
         UploadTask uploadTask = river.putFile(file2);
 
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                msg1();
+            }
+        });
     }
 
 
     //  Download Working.
     private void downloadFile(){
 
+
         StorageReference storageRef = storage.getReference();
-        StorageReference isLandRef = storageRef.child("users/1/a42.txt");
+        StorageReference isLandRef = storageRef.child("temp/userid.txt");
 
         File dir = getFilesDir();
-        File file = new File(dir, "a22.txt");
+        File file = new File(dir, "userid.txt");
         isLandRef.getFile(file);
 
     }
