@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth firebaseAuth;
 
     HomePageActivity homePageActivity = new HomePageActivity();
+    static String tempEmail = "abc@12";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     progressBar.setVisibility(View.GONE);
 
                     // --
-                    homePageActivity.a11(email);
+                    HomePageActivity.cEmail = email;
+                    //tempEmail = email;
 
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

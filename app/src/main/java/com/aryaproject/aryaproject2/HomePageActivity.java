@@ -11,7 +11,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -19,7 +27,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     StorageReference storageReference;
     InputStream stream;
     UploadTask uploadTask;
-    private String currentEmail = "asa@afa.no";
+    private String currentEmail = "asi@afa.no";
+    private String folderName = "abc";
+    private String currentFileName = "null";
+
+    static String cEmail = "no email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +53,40 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 Toast.LENGTH_SHORT).show();
     }*/
 
-    private void sync1() {
+    private void sync1() throws IOException {
 
         storage = FirebaseStorage.getInstance();
 
-
-        String folderName = ashwin(currentEmail);
+        currentEmail = HomePageActivity.cEmail;
+        Log.d("CurrentEmail", currentEmail);
+        folderName = ashwin(currentEmail);
         Log.d("Ashwin", folderName);
 
-        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(folderName + ".txt");
-        stream = getResources().openRawResource(R.raw.ab);
+        currentFileName = ashwinDate();
+
+        //koh5();
+        //koh4();
+        //koh3();
+        //koh2();
+        //koh1();
+        //hcma1();
+
+        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(currentFileName + ".txt");
+        stream = getResources().openRawResource(R.raw.healthstate);
         uploadTask = storageReference.putStream(stream);
-//
-//        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + currentEmail + "/").child(folderName + ".csv");
-//        stream = getResources().openRawResource(R.raw.ab);
-//        uploadTask = storageReference.putStream(stream);
+
+        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/users/" + folderName + "/").child(currentFileName + ".csv");
+        stream = getResources().openRawResource(R.raw.demo);
+        uploadTask = storageReference.putStream(stream);
+
+        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/temp/").child("recent_csv.txt");
+        stream = getResources().openRawResource(R.raw.recent_csv);
+        uploadTask = storageReference.putStream(stream);
+
+        storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/temp/").child("userid.txt");
+        stream = getResources().openRawResource(R.raw.userid);
+        uploadTask = storageReference.putStream(stream);
+
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -64,6 +95,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
 
 
+
+    }
+
+    private void koh5() {
+
+        tempFile1 t1 = new tempFile1();
+        //t1.updateFile1();
 
     }
 
@@ -76,7 +114,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.idButtonSync:
-                sync1();
+                try {
+                    sync1();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -96,6 +138,126 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         String str = email.substring(0, a);
 
         return str;
+    }
+
+    private String ashwinDate(){
+
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD_HH-mm-SS");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    private void koh4()  {
+
+        try {
+            String fileName = "a1.txt";
+            String str = "hello";
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName));
+            bufferedWriter.write(str);
+            bufferedWriter.close();
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("aq1", "error!");
+        }
+    }
+
+    private void koh3(){
+        String fileName = "C:/Users/King Of HearTs/AndroidStudioProjects/AryaProject2/app/src/main/res/raw/a1.txt";
+        try {
+            File file = new File("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\a1.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            PrintWriter pw = new PrintWriter(file);
+            pw.print("healthy!");
+            pw.close();
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("aq1", "error!");
+        }
+    }
+
+    private void koh2() {
+        String fileName = "C:/Users/King Of HearTs/AndroidStudioProjects/AryaProject2/app/src/main/res/raw/healthstate.txt";
+        String str = "Hello";
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("q11", "invalid Path");
+        }
+        try {
+            writer.write(str);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("q11", "written1");
+        }
+
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("q11", "written2");
+        }
+        Log.d("q11", "written");
+    }
+
+    private void koh1()  {
+
+        String fileName = "C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\healthstate.txt";
+        PrintWriter printWriter = null;
+        try (FileWriter fileWriter = new FileWriter(fileName)) {
+
+            printWriter = new PrintWriter(fileWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        printWriter.print("healthy string");
+        //printWriter.printf("Product name is %s and its price is %d $", "iPhone", 1000);
+        printWriter.close();
+
+    }
+
+    private void hcma1(){
+
+        String fileNameUserid;
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\healthstate.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.print("healthy");
+        printWriter.close();
+//            PrintWriter out = new PrintWriter("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\" + currentFileName + ".txt");
+//            out.print("he");
+
+/*
+            PrintWriter out = new PrintWriter("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\userid.txt");
+
+            out.print(folderName);
+*/
+/*
+
+            out = new PrintWriter("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\recent_csv.txt");
+            out.print(currentFileName + ".csv");
+
+            PrintWriter out1 = new PrintWriter("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\" + currentFileName + ".txt");
+            out1.print("healthy");
+
+            out = new PrintWriter("C:\\Users\\King Of HearTs\\AndroidStudioProjects\\AryaProject2\\app\\src\\main\\res\\raw\\" + currentFileName + ".csv");
+*/
+
+        //  Simulator.
+
+
+        //out.close();
+//            out1.close();
+
     }
 }
 
