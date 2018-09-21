@@ -68,7 +68,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         Log.d("Ashwin", folderName);
 
         currentFileName = ashwinDate();
-
+/*
             //koh7();
         uploadFile("recent_csv.txt");   //  working.
         uploadFile("userid.txt");       //  working.
@@ -80,19 +80,28 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         updateRecent_CSVFile(currentFileName);
 
         //downloadFile(currentFileName, "users", ".txt");
-        koh2();
+        koh2();*/
 //        download_ml_run();
         edit_ml_run();
         upload_ml_run();
 
-        //
+        // ----------------------------
 
+        perfectTesterByKoh();
+
+        // ----------------------------
+
+
+
+
+
+/*
         File dir = getFilesDir();
         File file = new File(dir, "k.txt");
         if(file.exists())
             Log.d("status", "exists");
         else
-            Log.d("status", "not exists");
+            Log.d("status", "not exists");*/
 
         //
 
@@ -107,6 +116,29 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         //uploadFile("c.txt");
           //downloadFile();   //  working.
 
+
+    }
+
+    //  Testing All 4 tasks working successfully.
+    //  Write, Read, Upload & Downnload.
+    private void perfectTesterByKoh() throws IOException {
+
+        String fullFileName1 = "recent_csv.txt";
+        String data = "run";
+        String firebaseFolder = "temp";
+        String soureFileName = "recent_csv";
+        String extension = ".txt";
+
+        writeToAnyFile(data, fullFileName1);
+        readFromAnyFile(fullFileName1);
+
+        uploadAnyFile(firebaseFolder, soureFileName, extension);
+        downloadAnyFile(firebaseFolder, soureFileName, extension);
+        readFromAnyFile(soureFileName + extension);
+        data = "stop";
+
+        writeToAnyFile(data, soureFileName + extension);
+        readFromAnyFile(soureFileName + extension);
 
     }
 
@@ -524,21 +556,21 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     //  currentTime: current date & time [YY-MM-DD_HH-MM-SS]
     //  extension: .txt, .csv
 
-    private void uploadAnyFile(String firebaseFolder, String currentTime, String extension){
+    private void uploadAnyFile(String firebaseFolder, String sourceFileName, String extension){
         //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
         //readAndWriteFiles(tempFileName);
 
         File dir = getFilesDir();
-        File file = new File(dir, "d.txt");
-        if(file.exists())
+        File file = new File(dir, sourceFileName + extension);
+        /*if(file.exists())
             Log.d("status", "exists");
         else
-            Log.d("status", "No!");
+            Log.d("status", "No!");*/
         Uri file2 = Uri.fromFile(file);
         StorageReference storageRef = storage.getReference();
 
-        StorageReference river = storageRef.child(firebaseFolder + "/" + currentTime + extension);
-        UploadTask uploadTask = river.putFile(file2);
+        StorageReference riv = storageRef.child(firebaseFolder + "/" + sourceFileName + extension);
+        UploadTask uploadTask = riv.putFile(file2);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -551,13 +583,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     // ------------------------------------------
     //  Download File Working.
-    private void downloadAnyFile(String firebaseFolder, String fileName, String extension) throws IOException {
+    private void downloadAnyFile(String firebaseFolder, String sourceFileName, String extension) throws IOException {
 
         StorageReference storageRef = storage.getReference();
-        final StorageReference riversRef = storageRef.child( firebaseFolder + "/" + fileName + extension );
+        final StorageReference firebaseFileRef = storageRef.child( firebaseFolder + "/" + sourceFileName + extension );
 
-        final File localFile = File.createTempFile(fileName, extension);
-        riversRef.getFile(localFile)
+        final File localFile = File.createTempFile(sourceFileName, extension);
+        firebaseFileRef.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -583,6 +615,49 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 Log.d("status" ,"not downloaded");
             }
         });
+    }
+
+    //  Write data to any file.
+    //  data: content to write.
+    //  localFileName: file name with extension in which data needs to be written & this file will be at Mysterious Place.
+    private void writeToAnyFile(String data, String localFileName) throws IOException {
+
+        File dir = getFilesDir();
+        File file = new File(dir, localFileName);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+        bufferedWriter.write(data);
+        bufferedWriter.close();
+    }
+
+    // Read:
+    private void readFromAnyFile(String sourceFileNameWExt){
+        File dir = getFilesDir();
+        File file = new File(dir, sourceFileNameWExt);
+        String readData = "";
+        //File f = new File()
+        try {
+            // Handle Csv file properly ASAP!!!.
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while((line = bufferedReader.readLine() ) != null ){
+                Log.d("status", line);
+                readData += line;
+            }
+            bufferedReader.close();
+            Log.d("status", readData);
+
+            if(readData.equals("stop"))
+                Log.d("status", "Machine has predicted its results successfully.");
+            if(readData.equals("run"))
+                Log.d("status", "Machine is Running its Algo. (Your System is in Busy Waiting)");
+
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("status", "error!");
+            Log.d("status", file.getPath());
+        }
+
     }
 
 
