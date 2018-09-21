@@ -2,12 +2,15 @@ package com.aryaproject.aryaproject2;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -57,14 +60,14 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         currentFileName = ashwinDate();
 
             //koh7();
-          uploadFile("recent_csv.txt");   //  working.
-          uploadFile("userid.txt");       //  working.
+        uploadFile("recent_csv.txt");   //  working.
+        uploadFile("userid.txt");       //  working.
 
         uploadFileUserCsv(ashwin(HomePageActivity.eEmail));
         uploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
 
-        downloadFile(currentFileName, "users", ".txt");
-
+        //downloadFile(currentFileName, "users", ".txt");
+        koh2();
 
         //
 
@@ -307,18 +310,83 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    //  Download Working.
-    private void downloadFile(String currentFileName, String firebaseFolder, String extension){
+    private void koh2() throws IOException {
 
         StorageReference storageRef = storage.getReference();
-        StorageReference isLandRef = storageRef.child(firebaseFolder + "/" + ashwin(eEmail) + "/" + currentFileName + ".txt");
+        final StorageReference riversRef = storageRef.child("temp/userid.txt");
+
+        final File localFile = File.createTempFile("userid", "txt");
+        riversRef.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        Log.d("status" ,"downloaded");
+
+                        Log.d("status" , riversRef.getDownloadUrl().toString());
+                        Log.d("status" , localFile.getAbsolutePath());
+
+                        if(localFile.exists())
+                            Log.d("status" ,"Exists");
+
+                        if(!localFile.exists())
+                            Log.d("status" , "No");
+                        // ...
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+                Log.d("status" ,"not downloaded");
+            }
+        });
+
+
+    }
+
+
+
+
+
+    //  Download Working.
+    private void downloadFile(String currentFileName, String firebaseFolder, String extension){
+        Log.d("status" ,"entered");
+        StorageReference storageRef = storage.getReference();
+        final StorageReference isLandRef = storageRef.child(firebaseFolder + "/" + ashwin(eEmail) + "/" + currentFileName + ".txt");
 
         File dir = getFilesDir();
-        File file = new File(dir, "k.txt");
-        isLandRef.getFile(file);
+        final File file = new File(dir, "k.txt");
+
+        Log.d("status" ,"got file");
+        isLandRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                Log.d("status" , isLandRef.getDownloadUrl().toString());
+                Log.d("status" , file.getAbsolutePath());
+
+                if(file.exists())
+                    Log.d("status" ,"Exists");
+
+                if(!file.exists())
+                    Log.d("status" , "No");
+
+            }
 
 
 
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(file.exists())
+                    Log.d("status" ,"Failed");
+
+            }
+        });
+
+        Log.d("status" ,"exit");
     }
 
     private void readDownloadedFile(String fullFileName){
