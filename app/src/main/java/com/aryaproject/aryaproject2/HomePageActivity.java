@@ -737,9 +737,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
 /*
     Aims:
-    1. Upload CSV File.
-    2. Health State File Upload.
-    3. Upload Name of CSV File & Userid in text files.
-
-    4. Download Health State file.
+    1. Upload CSV File. [Partially Done] [Simulation left]
+    2. Health State File Upload.    [Done]
+    3. Upload Name of CSV File & Userid in text files.  [Done]
+    4. Download Health State file.  [Done]
 */
