@@ -53,7 +53,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-
         findViewById(R.id.idButtonSync).setOnClickListener(this);
 
     }
@@ -68,58 +67,15 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         Log.d("Ashwin", folderName);
 
         currentFileName = ashwinDate();
-/*
-            //koh7();
-        uploadFile("recent_csv.txt");   //  working.
-        uploadFile("userid.txt");       //  working.
 
-        uploadFileUserCsv(ashwin(HomePageActivity.eEmail));
-        uploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
-
-        // https://github.com/KOHTheCodeMaster02/AryaProject2
-        updateRecent_CSVFile(currentFileName);
-
-        //downloadFile(currentFileName, "users", ".txt");
-        koh2();*/
-//        download_ml_run();
         edit_ml_run();
         upload_ml_run();
 
-        // ----------------------------
-
-        perfect2();
-
+        update4MajorFiles();
         //perfectTesterByKoh();
-
-        // ----------------------------
-
-
-
-
-
-/*
-        File dir = getFilesDir();
-        File file = new File(dir, "k.txt");
-        if(file.exists())
-            Log.d("status", "exists");
-        else
-            Log.d("status", "not exists");*/
-
-        //
-
-//        asishUploadFileUserTxt("chocho.txt", currentFileName);
-        //readDownloadedFile(currentFileName + ".txt");
-        //asishUploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
-
-        //readDownloadedFile(currentFileName, ".txt");
-
-
-        //downloadFile();
-        //uploadFile("c.txt");
-          //downloadFile();   //  working.
-
-
     }
+
+    //  4 Major Important Functions!!!
 
     private void updateUsersTxt() throws IOException {
 
@@ -169,7 +125,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void perfect2() throws IOException {
+    private void update4MajorFiles() throws IOException {
 
         updateUseridDotText();
         updateRecent_CsvDotTxt();
@@ -203,92 +159,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void updateRecent_CSVFile(String currentFileName){
-        koh4(currentFileName);
-
-        asishUploadFileUserTxt("temp", currentFileName, ".csv");
-
-    }
-
-    //  Write Current File name in recent_csv.txt which is present at mysterious place.
-    private void koh4(String currentFileName) {
-
-        File dir = getFilesDir();
-        File file = new File(dir, "recent_csv.txt");
-        //File f = new File()
-        try {
-            // Handle Csv file properly ASAP!!!.
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(currentFileName + ".csv");
-            bufferedWriter.close();
-
-        } catch (IOException e){
-            e.printStackTrace();
-            Log.d("status", "error!");
-            Log.d("status", file.getPath());
-        }
-
-
-    }
-
-    private void readDownloadedFile(String currentFileName, String extension) {
-
-        File dir = getFilesDir();
-        File file = new File(dir, currentFileName + extension );
-        try {
-            Log.d("aq2", "entered\n File: "+ currentFileName + extension);
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line = null;
-            line = bufferedReader.readLine();
-            Log.d("aq2", line);
-            /*
-            while((line = bufferedReader.readLine() ) != null ){
-                Log.d("aq2", line);
-            }*/
-            bufferedReader.close();
-            Log.d("aq2", "exit\n");
-
-        } catch (IOException e){
-            e.printStackTrace();
-            Log.d("aq1", "error!");
-            Log.d("aq1", file.getPath());
-        }
-        Log.d("aq2", "unknown\n");
-
-    }
-
-
-    // Kaam kar raha hai jo wahi hai ye. ~Asish Dada.
-    private File readAndWriteFilesWithExtension(String tempFileName){
-        //koh6();
-        File dir = getFilesDir();
-        File file = new File(dir, tempFileName);
-        //File f = new File()
-        try {
-
-            String str = ashwin( HomePageActivity.eEmail);
-            if(tempFileName.equals("recent_csv.txt"))
-                str += ".csv";
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(str);
-            bufferedWriter.close();
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line = null;
-            while((line = bufferedReader.readLine() ) != null ){
-                Log.d("aq1", line);
-            }
-            bufferedReader.close();
-
-        } catch (IOException e){
-            e.printStackTrace();
-            Log.d("aq1", "error!");
-            Log.d("aq1", file.getPath());
-        }
-
-        return file;
-    }
 
 
     private void msg1(){
@@ -329,185 +199,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         return dateFormat.format(date);
     }
 
-    //  Working.    for Temp folder.
-    private void uploadFile(String tempFileName){
-
-        readAndWriteFilesWithExtension(tempFileName);
-
-        File dir = getFilesDir();
-        File file = new File(dir, tempFileName);
-        Uri file2 = Uri.fromFile(file);
-        StorageReference storageRef = storage.getReference();
-
-
-        StorageReference river = storageRef.child("temp/" + tempFileName);
-        UploadTask uploadTask = river.putFile(file2);
-
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                msg1();
-            }
-        });
-    }
-
-
-    private void uploadFileUserCsv(String tempFileName){
-
-        readAndWriteFiles(tempFileName);
-
-        File dir = getFilesDir();
-        File file = new File(dir, tempFileName);
-        Uri file2 = Uri.fromFile(file);
-        StorageReference storageRef = storage.getReference();
-
-        StorageReference river = storageRef.child("users/" + tempFileName + "/" + currentFileName + ".csv");
-        UploadTask uploadTask = river.putFile(file2);
-
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                msg1();
-            }
-        });
-    }
-
-    //  Called when uploading for users folder.
-    private void readAndWriteFiles(String tempFileName) {
-        //koh6();
-        File dir = getFilesDir();
-        File file = new File(dir, tempFileName);
-        //File f = new File()
-        try {
-            // Handle Csv file properly ASAP!!!.
-
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write("healthy");
-            bufferedWriter.close();
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line = null;
-            while((line = bufferedReader.readLine() ) != null ){
-                Log.d("status", line);
-            }
-            bufferedReader.close();
-
-        } catch (IOException e){
-            e.printStackTrace();
-            Log.d("status", "error!");
-            Log.d("status", file.getPath());
-        }
-
-    }
-
-    // asish upload.
-
-    private void asishUploadFileUserTxt(String firebaseFolder, String currentTime, String extension){
-        //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
-        //readAndWriteFiles(tempFileName);
-
-        File dir = getFilesDir();
-        File file = new File(dir, "d.txt");
-        if(file.exists())
-            Log.d("status", "exists");
-        else
-            Log.d("status", "No!");
-        Uri file2 = Uri.fromFile(file);
-        StorageReference storageRef = storage.getReference();
-
-        StorageReference river = storageRef.child(firebaseFolder + "/" + currentTime + extension);
-        UploadTask uploadTask = river.putFile(file2);
-
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                msg1();
-            }
-        });
-    }
-
-
-    // Upload under "users/" + ashwin(eEmail) + "/" + currentFileName + ".txt";
-
-    private void uploadFileUserTxt(String tempFileName, String currentTime){
-        //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
-        readAndWriteFiles(tempFileName);
-
-        File dir = getFilesDir();
-        File file = new File(dir, tempFileName);
-        Uri file2 = Uri.fromFile(file);
-        StorageReference storageRef = storage.getReference();
-
-        StorageReference river = storageRef.child("users/" + tempFileName + "/" + currentFileName + ".txt");
-        UploadTask uploadTask = river.putFile(file2);
-
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                msg1();
-            }
-        });
-    }
-
-
-    //  Download File Working.
-    private void koh2() throws IOException {
-
-        StorageReference storageRef = storage.getReference();
-        final StorageReference riversRef = storageRef.child("temp/userid.txt");
-
-        final File localFile = File.createTempFile("userid", "txt");
-        riversRef.getFile(localFile)
-                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        // Successfully downloaded data to local file
-                        Log.d("status" ,"downloaded");
-
-                        Log.d("status" , riversRef.getDownloadUrl().toString());
-                        Log.d("status" , localFile.getAbsolutePath());
-
-                        if(localFile.exists())
-                            Log.d("status" ,"Exists");
-
-                        if(!localFile.exists())
-                            Log.d("status" , "No");
-                        // ...
-                    }
-
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle failed download
-                // ...
-                Log.d("status" ,"not downloaded");
-            }
-        });
-
-
-    }
-
-//    we are downloading the ml_run file to check if there is already some syncing going on
-//    private void download_ml_run() throws IOException {
-//        StorageReference storageRef = storage.getReference();
-//        final StorageReference riversRef = storageRef.child("temp/ml_run.txt");
-//
-//        File localFile = File.createTempFile("ml_run", "txt");
-//        riversRef.getFile(localFile)
-//                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                        // Successfully downloaded data to local file
-//                        // ...
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle failed download
-//                // ...
-//            }
-//        });
-//    }
-//
 
 //  on every sync we tell the ml algo to run on the latest data
     private void edit_ml_run() throws IOException {
@@ -542,79 +233,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
-
-
-    //  Download Working.
-    private void downloadFile(String currentFileName, String firebaseFolder, String extension){
-        Log.d("status" ,"entered");
-        StorageReference storageRef = storage.getReference();
-        final StorageReference isLandRef = storageRef.child(firebaseFolder + "/" + ashwin(eEmail) + "/" + currentFileName + ".txt");
-
-        File dir = getFilesDir();
-        final File file = new File(dir, "k.txt");
-
-        Log.d("status" ,"got file");
-        isLandRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
-                Log.d("status" , isLandRef.getDownloadUrl().toString());
-                Log.d("status" , file.getAbsolutePath());
-
-                if(file.exists())
-                    Log.d("status" ,"Exists");
-
-                if(!file.exists())
-                    Log.d("status" , "No");
-
-            }
-
-
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if(file.exists())
-                    Log.d("status" ,"Failed");
-
-            }
-        });
-
-        Log.d("status" ,"exit");
-    }
-
-    private void readDownloadedFile(String fullFileName){
-        //koh6();
-        File dir = getFilesDir();
-        File file = new File(dir, "chocho.txt");
-        //File f = new File()
-        try {
-            // Handle Csv file properly ASAP!!!.
-
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line = null;
-            while((line = bufferedReader.readLine() ) != null ){
-                Log.d("chocho", line);
-            }
-            bufferedReader.close();
-
-        } catch (IOException e){
-            e.printStackTrace();
-            Log.d("chocho", "error!");
-            Log.d("chocho", file.getPath());
-        }
-
-    }
-
-
-
-
-
     // -----------------------------------------
     //             Upload Any File.
-    //  firebaseFolder: users, temp, users/a1, etc...
-    //  currentTime: current date & time [YY-MM-DD_HH-MM-SS]
+    //  firebaseFolder: users, temp, users/a1, etc... (do not use '/' at the end of the firebaseFolderName.
+    //  sourceFileName: source file which exists in mysterious place (with content) which needs to be uploaded on firebase.
     //  extension: .txt, .csv
 
     private void uploadAnyFile(String firebaseFolder, String sourceFileName, String extension){
@@ -644,6 +266,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     // ------------------------------------------
     //  Download File Working.
+    //  firebaseFolder: users, temp, users/a1, etc... (do not use '/' at the end of the firebaseFolderName.
+    //  sourceFileName: source file which exists in mysterious place (with content) which needs to be uploaded on firebase.
+    //  extension: .txt, .csv
     private void downloadAnyFile(String firebaseFolder, String sourceFileName, String extension) throws IOException {
 
         StorageReference storageRef = storage.getReference();
@@ -683,6 +308,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     //  localFileName: file name with extension in which data needs to be written & this file will be at Mysterious Place.
     private void writeToAnyFile(String data, String localFileName) throws IOException {
 
+        //  localFileName is with the file with extension which needs the content to be written on it.
         File dir = getFilesDir();
         File file = new File(dir, localFileName);
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -691,6 +317,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     // Read:
+    // sourceFileNameWExt: source file name with extension from which data needs to be read line by line
+    // and printed on LogCat with tag "status".
     private void readFromAnyFile(String sourceFileNameWExt){
         File dir = getFilesDir();
         File file = new File(dir, sourceFileNameWExt);
@@ -721,14 +349,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
-
 }
 
 /*
  * Status: Working
- * Uploading "ab.txt" file at Firebase Storage under "test1" directory with file name "test.txt"
- * Last Modified: 20th September, 0743,
+ * Verified Before Sleep.
+ * Working: Reading, Writing, Uploading, Downloading Files from firebase.
+ * Last Modified: 22th September, 0040,
  * Developed By,
  * ~K.O.H..!! ^__^
  *

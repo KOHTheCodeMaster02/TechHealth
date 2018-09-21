@@ -28,12 +28,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     DatabaseReference databaseUser;
     HomePageActivity homePageActivity = new HomePageActivity();
 
-/*
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    InputStream stream;
-    UploadTask uploadTask;*/
-
     private FirebaseAuth mAuth;
     private String tempEmail = "abc@a.com";
 
@@ -95,12 +89,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         progressBar.setVisibility(View.VISIBLE);
 
-        /*
-        String id = databaseUser.push().getKey();
-
-        User user = new User(id, pName, pMobile, email);
-        databaseUser.child(id).setValue(user);
-        */
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -108,10 +96,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
-
-                    //User user = new User(pName, pMobile, email, gName, gMobile, dob);
-
-                    //progressBar.setVisibility(View.GONE);
 
                     String id = databaseUser.push().getKey();
                     User user = new User(pName, pMobile, email, gName, gMobile, dob);
@@ -121,40 +105,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Toast.LENGTH_SHORT).show();
 
                     HomePageActivity.eEmail = email;
-                    //tempEmail = email;
-
-                    // Ashwin Function.
-//                    String folderName = ashwin(email);
-//                    Log.d("Ashwin", folderName);
-
-/*
-                    storage = FirebaseStorage.getInstance();
-                    storageReference = storage.getReferenceFromUrl("gs://aryaproject2-7252e.appspot.com/temp/").child(folderName + ".txt");
-                    stream = getResources().openRawResource(R.raw.healthstate);
-                    uploadTask = storageReference.putStream(stream);*/
-
 
                     Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //progressBar.setVisibility(View.GONE);
                     startActivity(intent);
 
-                    /*
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-
-                                Intent intent = new Intent(SignUpActivity.this, ProfileActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                progressBar.setVisibility(View.GONE);
-                                startActivity(intent);
-                            }
-                        }
-                    });
-                    */
                 } else {
 
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
@@ -166,17 +121,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                     //Toast.makeText(getApplicationContext(), "Error during Registration....", Toast.LENGTH_SHORT).show();
                 }
-                //if()
-
             }
         });
-
     }
 
     private String ashwin(String email) {
 
-        //String str1 = email.substring(0, email.length())
-        //String str = "@";
         int a = email.indexOf('@');
         String str = email.substring(0, a);
 
@@ -205,7 +155,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
  * Status: Working
  * Task: Register New User into Firebase Database.
  * Next Activity: HomePageActivity.
- * Last Modified: 20th September, 0801,
+ * Last Modified: 22nd September, 0042,
  * Developed By,
  * ~K.O.H..!! ^__^
  *
