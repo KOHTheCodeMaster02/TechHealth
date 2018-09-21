@@ -76,6 +76,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         uploadFileUserCsv(ashwin(HomePageActivity.eEmail));
         uploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
 
+        // https://github.com/KOHTheCodeMaster02/AryaProject2
+        updateRecent_CSVFile(currentFileName);
+
         //downloadFile(currentFileName, "users", ".txt");
         koh2();
 //        download_ml_run();
@@ -103,6 +106,35 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         //downloadFile();
         //uploadFile("c.txt");
           //downloadFile();   //  working.
+
+
+    }
+
+    private void updateRecent_CSVFile(String currentFileName){
+        koh4(currentFileName);
+
+        asishUploadFileUserTxt("temp", currentFileName, ".csv");
+
+    }
+
+    //  Write Current File name in recent_csv.txt which is present at mysterious place.
+    private void koh4(String currentFileName) {
+
+        File dir = getFilesDir();
+        File file = new File(dir, "recent_csv.txt");
+        //File f = new File()
+        try {
+            // Handle Csv file properly ASAP!!!.
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter.write(currentFileName + ".csv");
+            bufferedWriter.close();
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("status", "error!");
+            Log.d("status", file.getPath());
+        }
 
 
     }
@@ -276,12 +308,12 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     // asish upload.
 
-    private void asishUploadFileUserTxt(String tempFileName, String currentTime){
+    private void asishUploadFileUserTxt(String firebaseFolder, String currentTime, String extension){
         //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
         //readAndWriteFiles(tempFileName);
 
         File dir = getFilesDir();
-        File file = new File(dir, tempFileName);
+        File file = new File(dir, "d.txt");
         if(file.exists())
             Log.d("status", "exists");
         else
@@ -289,7 +321,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         Uri file2 = Uri.fromFile(file);
         StorageReference storageRef = storage.getReference();
 
-        StorageReference river = storageRef.child("users/asish/" + currentTime + ".txt");
+        StorageReference river = storageRef.child(firebaseFolder + "/" + currentTime + extension);
         UploadTask uploadTask = river.putFile(file2);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -323,40 +355,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    //  Download File Working.
-    private void koh3(String firebaseFolder, String fileName, String extension) throws IOException {
-
-        StorageReference storageRef = storage.getReference();
-        final StorageReference riversRef = storageRef.child("temp/userid.txt");
-
-        final File localFile = File.createTempFile("userid", "txt");
-        riversRef.getFile(localFile)
-                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        // Successfully downloaded data to local file
-                        Log.d("status" ,"downloaded");
-
-                        Log.d("status" , riversRef.getDownloadUrl().toString());
-                        Log.d("status" , localFile.getAbsolutePath());
-
-                        if(localFile.exists())
-                            Log.d("status" ,"Exists");
-
-                        if(!localFile.exists())
-                            Log.d("status" , "No");
-                        // ...
-                    }
-
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle failed download
-                // ...
-                Log.d("status" ,"not downloaded");
-            }
-        });
-    }
 
     //  Download File Working.
     private void koh2() throws IOException {
@@ -515,6 +513,79 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
+
+
+
+
+
+    // -----------------------------------------
+    //             Upload Any File.
+    //  firebaseFolder: users, temp, users/a1, etc...
+    //  currentTime: current date & time [YY-MM-DD_HH-MM-SS]
+    //  extension: .txt, .csv
+
+    private void uploadAnyFile(String firebaseFolder, String currentTime, String extension){
+        //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
+        //readAndWriteFiles(tempFileName);
+
+        File dir = getFilesDir();
+        File file = new File(dir, "d.txt");
+        if(file.exists())
+            Log.d("status", "exists");
+        else
+            Log.d("status", "No!");
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference river = storageRef.child(firebaseFolder + "/" + currentTime + extension);
+        UploadTask uploadTask = river.putFile(file2);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                msg1();
+            }
+        });
+    }
+
+
+    // ------------------------------------------
+    //  Download File Working.
+    private void downloadAnyFile(String firebaseFolder, String fileName, String extension) throws IOException {
+
+        StorageReference storageRef = storage.getReference();
+        final StorageReference riversRef = storageRef.child( firebaseFolder + "/" + fileName + extension );
+
+        final File localFile = File.createTempFile(fileName, extension);
+        riversRef.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        /*                        *//*Log.d("status" ,"downloaded");
+
+                        Log.d("status" , riversRef.getDownloadUrl().toString());
+                        Log.d("status" , localFile.getAbsolutePath());*//*
+
+                        if(localFile.exists())
+                            Log.d("status" ,"Exists");
+
+                        if(!localFile.exists())
+                            Log.d("status" , "No");
+                        // ...*/
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+                Log.d("status" ,"not downloaded");
+            }
+        });
+    }
+
+
 
 }
 
