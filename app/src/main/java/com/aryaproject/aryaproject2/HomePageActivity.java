@@ -87,7 +87,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         // ----------------------------
 
-        perfectTesterByKoh();
+        perfect2();
+
+        //perfectTesterByKoh();
 
         // ----------------------------
 
@@ -115,6 +117,65 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         //downloadFile();
         //uploadFile("c.txt");
           //downloadFile();   //  working.
+
+
+    }
+
+    private void updateUsersTxt() throws IOException {
+
+        String data = "healthy";
+        String localFileName = currentFileName;
+        String extension = ".txt";
+        String firebaseFolder = "users/" + ashwin(eEmail) ;
+
+        writeToAnyFile(data, localFileName + extension);
+        uploadAnyFile(firebaseFolder, localFileName, extension);
+
+    }
+
+
+    private void updateUsersCsv() throws IOException {
+
+        String data = currentFileName;  //  Get Simulated Data here.
+        String localFileName = currentFileName;
+        String extension = ".csv";
+        String firebaseFolder = "users/" + ashwin(eEmail) ;
+
+        writeToAnyFile(data, localFileName + extension);
+        uploadAnyFile(firebaseFolder, localFileName, extension);
+
+    }
+
+    private void updateRecent_CsvDotTxt() throws IOException {
+
+        String csvName = currentFileName;
+        String localFileName = "recent_csv";
+        String extension = ".txt";
+        String firebaseFolder = "temp";
+
+        writeToAnyFile(csvName + ".csv", localFileName + extension);
+        uploadAnyFile(firebaseFolder, localFileName, extension);
+
+    }
+
+    private void updateUseridDotText() throws IOException {
+        String userid = ashwin(eEmail);
+        String localFileName = "userid";
+        String extension = ".txt";
+        String firebaseFolder = "temp";
+
+        writeToAnyFile(userid, localFileName + extension);
+        uploadAnyFile(firebaseFolder, localFileName, extension);
+
+    }
+
+    private void perfect2() throws IOException {
+
+        updateUseridDotText();
+        updateRecent_CsvDotTxt();
+        updateUsersCsv();
+        updateUsersTxt();
+
 
 
     }
