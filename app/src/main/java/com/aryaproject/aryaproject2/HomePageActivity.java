@@ -60,8 +60,28 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
           uploadFile("recent_csv.txt");   //  working.
           uploadFile("userid.txt");       //  working.
 
-        uploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
         uploadFileUserCsv(ashwin(HomePageActivity.eEmail));
+        uploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
+
+        downloadFile(currentFileName, "users", ".txt");
+
+
+        //
+
+        File dir = getFilesDir();
+        File file = new File(dir, "k.txt");
+        if(file.exists())
+            Log.d("status", "exists");
+        else
+            Log.d("status", "not exists");
+
+        //
+
+//        asishUploadFileUserTxt("chocho.txt", currentFileName);
+        //readDownloadedFile(currentFileName + ".txt");
+        //asishUploadFileUserTxt(ashwin(HomePageActivity.eEmail), currentFileName);
+
+        //readDownloadedFile(currentFileName, ".txt");
 
 
         //downloadFile();
@@ -70,6 +90,33 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
+
+    private void readDownloadedFile(String currentFileName, String extension) {
+
+        File dir = getFilesDir();
+        File file = new File(dir, currentFileName + extension );
+        try {
+            Log.d("aq2", "entered\n File: "+ currentFileName + extension);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line = null;
+            line = bufferedReader.readLine();
+            Log.d("aq2", line);
+            /*
+            while((line = bufferedReader.readLine() ) != null ){
+                Log.d("aq2", line);
+            }*/
+            bufferedReader.close();
+            Log.d("aq2", "exit\n");
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("aq1", "error!");
+            Log.d("aq1", file.getPath());
+        }
+        Log.d("aq2", "unknown\n");
+
+    }
+
 
     // Kaam kar raha hai jo wahi hai ye. ~Asish Dada.
     private File readAndWriteFilesWithExtension(String tempFileName){
@@ -118,9 +165,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                     e.printStackTrace();
                 }
                 break;
+            case R.id.idButtonViewHealthReport:
+                //chiku();
+                break;
         }
     }
-
 
     private String ashwin(String email) {
 
@@ -197,18 +246,46 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = null;
             while((line = bufferedReader.readLine() ) != null ){
-                Log.d("aq1", line);
+                Log.d("status", line);
             }
             bufferedReader.close();
 
         } catch (IOException e){
             e.printStackTrace();
-            Log.d("aq1", "error!");
-            Log.d("aq1", file.getPath());
+            Log.d("status", "error!");
+            Log.d("status", file.getPath());
         }
 
     }
 
+    // asish upload.
+
+    private void asishUploadFileUserTxt(String tempFileName, String currentTime){
+        //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
+        //readAndWriteFiles(tempFileName);
+
+        File dir = getFilesDir();
+        File file = new File(dir, tempFileName);
+        if(file.exists())
+            Log.d("status", "exists");
+        else
+            Log.d("status", "No!");
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference river = storageRef.child("users/asish/" + currentTime + ".txt");
+        UploadTask uploadTask = river.putFile(file2);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                msg1();
+            }
+        });
+    }
+
+
+    // Upload under "users/" + ashwin(eEmail) + "/" + currentFileName + ".txt";
 
     private void uploadFileUserTxt(String tempFileName, String currentTime){
         //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
@@ -231,18 +308,41 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     //  Download Working.
-    private void downloadFile(){
-
+    private void downloadFile(String currentFileName, String firebaseFolder, String extension){
 
         StorageReference storageRef = storage.getReference();
-        StorageReference isLandRef = storageRef.child("temp/userid.txt");
+        StorageReference isLandRef = storageRef.child(firebaseFolder + "/" + ashwin(eEmail) + "/" + currentFileName + ".txt");
 
         File dir = getFilesDir();
-        File file = new File(dir, "c.txt");
+        File file = new File(dir, "k.txt");
         isLandRef.getFile(file);
+
+
 
     }
 
+    private void readDownloadedFile(String fullFileName){
+        //koh6();
+        File dir = getFilesDir();
+        File file = new File(dir, "chocho.txt");
+        //File f = new File()
+        try {
+            // Handle Csv file properly ASAP!!!.
+
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line = null;
+            while((line = bufferedReader.readLine() ) != null ){
+                Log.d("chocho", line);
+            }
+            bufferedReader.close();
+
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("chocho", "error!");
+            Log.d("chocho", file.getPath());
+        }
+
+    }
 
 }
 
