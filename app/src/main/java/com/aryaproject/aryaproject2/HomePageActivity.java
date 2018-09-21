@@ -38,6 +38,16 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     static String eEmail = "no email";
 
+    File ml_run_File;
+
+    {
+        try {
+            ml_run_File = File.createTempFile("ml_run", "txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +78,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         //downloadFile(currentFileName, "users", ".txt");
         koh2();
+//        download_ml_run();
+        edit_ml_run();
+        upload_ml_run();
 
         //
 
@@ -310,6 +323,42 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    //  Download File Working.
+    private void koh3(String firebaseFolder, String fileName, String extension) throws IOException {
+
+        StorageReference storageRef = storage.getReference();
+        final StorageReference riversRef = storageRef.child("temp/userid.txt");
+
+        final File localFile = File.createTempFile("userid", "txt");
+        riversRef.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        Log.d("status" ,"downloaded");
+
+                        Log.d("status" , riversRef.getDownloadUrl().toString());
+                        Log.d("status" , localFile.getAbsolutePath());
+
+                        if(localFile.exists())
+                            Log.d("status" ,"Exists");
+
+                        if(!localFile.exists())
+                            Log.d("status" , "No");
+                        // ...
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+                Log.d("status" ,"not downloaded");
+            }
+        });
+    }
+
+    //  Download File Working.
     private void koh2() throws IOException {
 
         StorageReference storageRef = storage.getReference();
@@ -346,6 +395,61 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+//    we are downloading the ml_run file to check if there is already some syncing going on
+//    private void download_ml_run() throws IOException {
+//        StorageReference storageRef = storage.getReference();
+//        final StorageReference riversRef = storageRef.child("temp/ml_run.txt");
+//
+//        File localFile = File.createTempFile("ml_run", "txt");
+//        riversRef.getFile(localFile)
+//                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                        // Successfully downloaded data to local file
+//                        // ...
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle failed download
+//                // ...
+//            }
+//        });
+//    }
+//
+
+//  on every sync we tell the ml algo to run on the latest data
+    private void edit_ml_run() throws IOException {
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(ml_run_File));
+        bufferedWriter.write("run");
+        bufferedWriter.close();
+    }
+
+//    we need to upload the run_ml file with content = run or stop
+    private void upload_ml_run() throws IOException {
+
+        StorageReference storageRef = storage.getReference();
+        Uri file = Uri.fromFile(new File(ml_run_File.toURI()));
+        StorageReference riversRef = storageRef.child("temp/ml_run.txt");
+
+        riversRef.putFile(file)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
+
+    }
 
 
 
