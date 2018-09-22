@@ -57,6 +57,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         findViewById(R.id.idButtonSync).setOnClickListener(this);
         findViewById(R.id.idButtonViewProfile).setOnClickListener(this);
+        findViewById(R.id.idButtonViewHealthReport).setOnClickListener(this);
 
     }
 
@@ -75,6 +76,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         update4MajorFiles();
         //perfectTesterByKoh();
+
     }
 
     //  4 Major Important Functions!!!
@@ -337,11 +339,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                     e.printStackTrace();
                 }
                 break;
-            case R.id.idButtonViewHealthReport:
-                //chiku();
-                break;
             case R.id.idButtonViewProfile:
                 startActivity(new Intent(this, ProfileActivity.class));
+                break;
+            case R.id.idButtonViewHealthReport:
+                startActivity(new Intent(this, HealthProfile.class));
                 break;
         }
     }
