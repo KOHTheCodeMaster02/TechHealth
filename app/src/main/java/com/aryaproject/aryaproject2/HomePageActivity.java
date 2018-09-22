@@ -1,5 +1,6 @@
 package com.aryaproject.aryaproject2;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,6 +38,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private String currentFileName = "null";
 
     static String eEmail = "no email";
+    static String currentUserHashId = "not assigned yet.";
 
     File ml_run_File;
 
@@ -54,6 +56,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_home_page);
 
         findViewById(R.id.idButtonSync).setOnClickListener(this);
+        findViewById(R.id.idButtonViewProfile).setOnClickListener(this);
 
     }
 
@@ -178,6 +181,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.idButtonViewHealthReport:
                 //chiku();
+                break;
+
+            case R.id.idButtonViewProfile:
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
         }
     }
