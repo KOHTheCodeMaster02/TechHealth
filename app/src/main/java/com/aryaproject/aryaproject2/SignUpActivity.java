@@ -104,7 +104,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Log.d("status", "Current User ID: | " + id + " |");
 
                     User user = new User(pName, pMobile, email, gName, gMobile, dob);
-                    databaseUser.child(id).setValue(user);
+                    databaseUser.child(ashwin(email)).setValue(user);
+
+                    HomePageActivity.currentUserHashId = ashwin(email);
 
                     Toast.makeText(getApplicationContext(), "Registration Successful",
                             Toast.LENGTH_SHORT).show();

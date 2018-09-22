@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     // --
                     HomePageActivity.eEmail = email;
+                    HomePageActivity.currentUserHashId = ashwin(email);
                     //tempEmail = email;
 /*
 
@@ -117,6 +118,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    private String ashwin(String email) {
+
+        //String str1 = email.substring(0, email.length())
+        //String str = "@";
+        int a = email.indexOf('@');
+        String str = email.substring(0, a);
+
+        return str;
+    }
+
 }
 
 /*

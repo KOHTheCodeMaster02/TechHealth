@@ -1,5 +1,6 @@
 package com.aryaproject.aryaproject2;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -60,7 +61,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void sync1() throws IOException {
-
+/*
         storage = FirebaseStorage.getInstance();
 
         currentEmail = HomePageActivity.eEmail;
@@ -74,7 +75,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         upload_ml_run();
 
         update4MajorFiles();
-        //perfectTesterByKoh();
+        //perfectTesterByKoh();*/
     }
 
     //  4 Major Important Functions!!!
@@ -181,10 +182,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             case R.id.idButtonViewHealthReport:
                 //chiku();
                 break;
-/*
             case R.id.idButtonViewProfile:
                 startActivity(new Intent(this, ProfileActivity.class));
-                break;*/
+                break;
         }
     }
 

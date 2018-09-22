@@ -25,16 +25,16 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         textViewDisplayEmail = (TextView) findViewById(R.id.idTextViewDisplayEmail);
-/*
 
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
                         HomePageActivity.currentUserHashId + "/email");
-*/
 
+/*
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
-                        "WpsSWhapcBO77GRWelzhX8xYV2I3" + "/email");
+                        "" + "/email");
+*/
 
 
 
