@@ -19,13 +19,17 @@ import com.google.firebase.storage.UploadTask;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.RoundingMode;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
@@ -71,8 +75,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         currentFileName = ashwinDate();
 
-        edit_ml_run();
-        upload_ml_run();
+//        edit_ml_run();
+//        upload_ml_run();
 
         update4MajorFiles();
         //perfectTesterByKoh();
@@ -94,6 +98,99 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    private void updateUsersCsv(String firebaseFolder) throws IOException {
+
+        int a=0;
+        double b=0.0;
+        int c=0,d=0;        File dir = getFilesDir();
+        File file = new File(dir, HomePageActivity.currentFileName + ".csv");
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+        Random r = new Random();
+
+        int low = 60, high = 100, heartrate;
+        double low1 = 36.5, high1 = 37.2, bodytemperature, bt;
+        bodytemperature = high1 - low1;
+        int low2 = 90, high2 = 120;
+        int low3 = 60, high3 = 80;
+        int systolicpressure, diastolicpressure;
+
+        try {
+            String str = "";
+            str +="HeartRate," + "Temperature," + "SystolicBloodPressure," + "DiastolicBloodPressure\n";
+
+            for (int i = 0; i <= 100; i++) {
+                heartrate = r.nextInt(high - low) + low;
+                a = a + heartrate;
+                bodytemperature = r.nextDouble() + low1;
+                DecimalFormat df = new DecimalFormat("#.###");
+                df.setRoundingMode(RoundingMode.CEILING);
+                bt = Double.parseDouble(df.format(bodytemperature));
+                b = b + bt;
+                systolicpressure = r.nextInt(high2 - low2) + low2;
+                c = c + systolicpressure;
+                diastolicpressure = r.nextInt(high3 - low3) + low3;
+                d = d + diastolicpressure;
+
+                if(i == 100)
+                    str += heartrate + "," + df.format(bodytemperature) + "," + systolicpressure + ","
+                            + diastolicpressure ;
+                else
+                    str += heartrate + "," + df.format(bodytemperature) + "," + systolicpressure + ","
+                            + diastolicpressure + "\n";
+            }
+            a = a / 100;
+            c = c / 100;
+            d = d / 100;
+            b = b / 100;
+            String hrate = a + "", temperature = b + "", spressure = c + "", dpressure = d + "";
+
+            Log.d("status", str);
+
+            writeToAnyFile(str, HomePageActivity.currentFileName + ".csv");
+            readFromAnyFile( HomePageActivity.currentFileName + ".csv");
+            uploadParticularUserCsv(firebaseFolder,HomePageActivity.currentFileName, ".csv" );
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void uploadParticularUserCsv(String firebaseFolder, String sourceFileName, String extension){
+        //readAndWriteFiles(tempFileName);
+
+        File dir = getFilesDir();
+        File file = new File(dir, sourceFileName + extension);
+        /*if(file.exists())
+            Log.d("status", "exists");
+        else
+            Log.d("status", "No!");*/
+        Uri file2 = Uri.fromFile(file);
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference riv = storageRef.child(firebaseFolder + "/" + sourceFileName + extension);
+        UploadTask uploadTask = riv.putFile(file2);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                try {
+                    edit_ml_run();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    upload_ml_run();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+/*
+    Empty Csv.
     private void updateUsersCsv() throws IOException {
 
         String data = currentFileName;  //  Get Simulated Data here.
@@ -106,6 +203,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         uploadAnyFile(firebaseFolder, localFileName, extension);
 
     }
+*/
 
     private void updateRecent_CsvDotTxt() throws IOException {
 
@@ -134,7 +232,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         updateUseridDotText();
         updateRecent_CsvDotTxt();
-        updateUsersCsv();
+        updateUsersCsv("users/" + ashwin(eEmail));
         updateUsersTxt();
 
 

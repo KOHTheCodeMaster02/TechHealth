@@ -101,10 +101,12 @@ public class HealthProfile extends AppCompatActivity {
             sys.setText(spressure);
             pulse.setText(hrate);
             Log.d("status", str);
-
+            writeToAnyFile(str, HomePageActivity.currentFileName + ".csv");
+/*
             writeToAnyFile(str, HomePageActivity.currentFileName + ".csv");
             readFromAnyFile( HomePageActivity.currentFileName + ".csv");
             uploadAnyFile(firebaseFolder,HomePageActivity.currentFileName, ".csv" );
+*/
 
 //            bufferedWriter.write(str);
 
