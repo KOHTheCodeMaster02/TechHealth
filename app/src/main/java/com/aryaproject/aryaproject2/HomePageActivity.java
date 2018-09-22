@@ -61,13 +61,12 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void sync1() throws IOException {
-/*
         storage = FirebaseStorage.getInstance();
 
         currentEmail = HomePageActivity.eEmail;
-        Log.d("CurrentEmail", currentEmail);
+//        Log.d("CurrentEmail", currentEmail);
         folderName = ashwin(currentEmail);
-        Log.d("Ashwin", folderName);
+//        Log.d("Ashwin", folderName);
 
         currentFileName = ashwinDate();
 
@@ -75,7 +74,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         upload_ml_run();
 
         update4MajorFiles();
-        //perfectTesterByKoh();*/
+        //perfectTesterByKoh();
     }
 
     //  4 Major Important Functions!!!
@@ -100,6 +99,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         String extension = ".csv";
         String firebaseFolder = "users/" + ashwin(eEmail) ;
 
+        // wrtieSimulatedCsvFile !!
         writeToAnyFile(data, localFileName + extension);
         uploadAnyFile(firebaseFolder, localFileName, extension);
 
@@ -107,7 +107,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     private void updateRecent_CsvDotTxt() throws IOException {
 
-        String csvName = currentFileName;
+        String csvName = currentFileName;   //  To Upload currentTime with ".txt" as content in recent_csv.txt
         String localFileName = "recent_csv";
         String extension = ".txt";
         String firebaseFolder = "temp";
@@ -118,7 +118,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateUseridDotText() throws IOException {
-        String userid = ashwin(eEmail);
+        String userid = ashwin(eEmail); // Data to write in "userid.txt" is user's email + ".txt"
         String localFileName = "userid";
         String extension = ".txt";
         String firebaseFolder = "temp";
@@ -169,24 +169,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.idButtonSync:
-                try {
-                    sync1();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.idButtonViewHealthReport:
-                //chiku();
-                break;
-            case R.id.idButtonViewProfile:
-                startActivity(new Intent(this, ProfileActivity.class));
-                break;
-        }
-    }
 
     private String ashwin(String email) {
 
@@ -246,7 +228,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     //  extension: .txt, .csv
 
     private void uploadAnyFile(String firebaseFolder, String sourceFileName, String extension){
-        //  tempFileName hume Ashwin bhaiya de rahe hai vo bhi ek dum MUFT!!!
         //readAndWriteFiles(tempFileName);
 
         File dir = getFilesDir();
@@ -264,7 +245,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                msg1();
+//                msg1();
             }
         });
     }
@@ -285,18 +266,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        // Successfully downloaded data to local file
-                        /*                        *//*Log.d("status" ,"downloaded");
 
-                        Log.d("status" , riversRef.getDownloadUrl().toString());
-                        Log.d("status" , localFile.getAbsolutePath());*//*
-
-                        if(localFile.exists())
-                            Log.d("status" ,"Exists");
-
-                        if(!localFile.exists())
-                            Log.d("status" , "No");
-                        // ...*/
                     }
 
                 }).addOnFailureListener(new OnFailureListener() {
@@ -335,16 +305,18 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line = null;
             while((line = bufferedReader.readLine() ) != null ){
-                Log.d("status", line);
+//                Log.d("status", line);
                 readData += line;
             }
             bufferedReader.close();
             Log.d("status", readData);
+/*
 
             if(readData.equals("stop"))
                 Log.d("status", "Machine has predicted its results successfully.");
             if(readData.equals("run"))
                 Log.d("status", "Machine is Running its Algo. (Your System is in Busy Waiting)");
+*/
 
 
         } catch (IOException e){
@@ -355,7 +327,39 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.idButtonSync:
+                try {
+                    sync1();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.idButtonViewHealthReport:
+                //chiku();
+                break;
+            case R.id.idButtonViewProfile:
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
+        }
+    }
+
+
 }
+
+/*
+ * Pending:
+ * 1. App Drawer
+ *      a. Default Home Page -> Health Report.
+ *      b. Next Page -> View Profile.
+ *      c. Next Page -> About Us.
+ *      d. Next Page => Help.
+ * 2. Realtime Sync Health Report [every 2 seconds]
+ * 3. Run Stop ML Handle.
+ * 4. Doctor UI.
+ */
 
 /*
  * Status: Working

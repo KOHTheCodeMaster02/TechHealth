@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -98,10 +97,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
 
-                    String id = databaseUser.push().getKey();
-                    HomePageActivity.currentUserHashId = id;
+//                    String id = databaseUser.push().getKey();
+//                    HomePageActivity.currentUserHashId = id;
 
-                    Log.d("status", "Current User ID: | " + id + " |");
+//                    Log.d("status", "Current User ID: | " + id + " |");
 
                     User user = new User(pName, pMobile, email, gName, gMobile, dob);
                     databaseUser.child(ashwin(email)).setValue(user);
