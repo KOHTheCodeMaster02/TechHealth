@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     HomePageActivity homePageActivity = new HomePageActivity();
     static String tempEmail = "abc@12";
+    private DatabaseReference firebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +75,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if(task.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
 
                     // --
                     HomePageActivity.eEmail = email;
                     //tempEmail = email;
+/*
 
-
+                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                    assert currentUser != null;
+                    String id = currentUser.getUid();
+                    currentUser.getProviderId();
+                    Log.d("status", "logged in id: " + id);
+*/
 
                     Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -93,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-
-
     }
 
     @Override
