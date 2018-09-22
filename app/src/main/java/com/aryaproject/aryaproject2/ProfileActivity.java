@@ -15,6 +15,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     DatabaseReference firebaseRef;
     TextView textViewDisplayEmail;
+    private User currentUserDetails;
 
     // Parameters:
 
@@ -28,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
-                        HomePageActivity.currentUserHashId + "/email");
+                        HomePageActivity.currentUserHashId);
 
 /*
         firebaseRef = FirebaseDatabase.getInstance()
@@ -41,8 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String temp = dataSnapshot.getValue(String.class);
-                textViewDisplayEmail.setText(temp);
+                currentUserDetails = dataSnapshot.getValue(User.class);
+                textViewDisplayEmail.setText(currentUserDetails.getEmail());
             }
 
             @Override

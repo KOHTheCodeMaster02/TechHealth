@@ -37,6 +37,34 @@ public class User {
         this.guardianMobile = guardianMobile;
         //this.email = email;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getPatientMobile() {
+        return patientMobile;
+    }
+
+    public String getGuardianName() {
+        return guardianName;
+    }
+
+    public String getGuardianMobile() {
+        return guardianMobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
 
 /*
