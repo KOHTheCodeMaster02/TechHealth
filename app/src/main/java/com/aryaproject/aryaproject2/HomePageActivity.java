@@ -35,7 +35,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     UploadTask uploadTask;
     private String currentEmail = "asi@afa.no";
     private String folderName = "abc";
-    private String currentFileName = "null";
+    static String currentFileName = "null";
 
     static String eEmail = "no email";
     static String currentUserHashId = "not assigned yet.";

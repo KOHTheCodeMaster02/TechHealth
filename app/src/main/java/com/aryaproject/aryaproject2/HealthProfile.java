@@ -19,7 +19,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.RoundingMode;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class HealthProfile extends AppCompatActivity {
@@ -43,22 +46,16 @@ public class HealthProfile extends AppCompatActivity {
         dia = (TextView) findViewById(R.id.ubp);
 
         try {
-            writeToAnyFile("asish", "a.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        readFromAnyFile("a.txt");
-        try {
-            chocho1();
+            chocho1("users/" + ashwin( HomePageActivity.eEmail) ) ;
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void chocho1() throws IOException {
+    private void chocho1(String firebaseFolder) throws IOException {
 
         File dir = getFilesDir();
-        File file = new File(dir, "a.csv");
+        File file = new File(dir, HomePageActivity.currentFileName + ".csv");
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
         Random r = new Random();
 
@@ -70,9 +67,6 @@ public class HealthProfile extends AppCompatActivity {
         int systolicpressure, diastolicpressure;
 
         try {
-
-
-//            PrintWriter out = new PrintWriter(file);
             String str = "";
             str +="HeartRate," + "Temperature," + "SystolicBloodPressure," + "DiastolicBloodPressure\n";
 
@@ -108,9 +102,9 @@ public class HealthProfile extends AppCompatActivity {
             pulse.setText(hrate);
             Log.d("status", str);
 
-            writeToAnyFile(str, "a.csv");
-            readFromAnyFile( "a.csv");
-            uploadAnyFile("temp","a", ".csv" );
+            writeToAnyFile(str, HomePageActivity.currentFileName + ".csv");
+            readFromAnyFile( HomePageActivity.currentFileName + ".csv");
+            uploadAnyFile(firebaseFolder,HomePageActivity.currentFileName, ".csv" );
 
 //            bufferedWriter.write(str);
 
@@ -194,7 +188,22 @@ public class HealthProfile extends AppCompatActivity {
             }
         });
     }
+    private String ashwin(String email) {
 
+        //String str1 = email.substring(0, email.length())
+        //String str = "@";
+        int a = email.indexOf('@');
+        String str = email.substring(0, a);
+
+        return str;
+    }
+
+    private String ashwinDate(){
+
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD_HH-mm-SS");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 
 
 }
