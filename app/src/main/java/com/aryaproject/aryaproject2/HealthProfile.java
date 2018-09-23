@@ -34,7 +34,7 @@ public class HealthProfile extends AppCompatActivity {
     public int a=0;
     double b=0.0;
     int c=0,d=0;
-
+    static String status = "Healthy";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

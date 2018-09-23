@@ -46,11 +46,12 @@ public class ProfileActivity extends AppCompatActivity {
         textViewDisplayGuardianMobile = (TextView) findViewById(R.id.idDisplayGuardianMobile);
         textViewDisplayDoctorName = (TextView) findViewById(R.id.idDisplayDoctorName);
         textViewDisplayDoctorMobile = (TextView) findViewById(R.id.idDisplayDoctorMobile);
+        textViewDisplayDoctorEmail = (TextView) findViewById(R.id.idDisplayDoctorEmail);
         textViewDisplayGender = (TextView) findViewById(R.id.idDisplayGender);
         textViewDisplayDOB = (TextView) findViewById(R.id.idDisplayDob);
-        textViewDisplayWeight = (TextView) findViewById(R.id.idDisplayWeight);
-        textViewDisplayHeight = (TextView) findViewById(R.id.idDisplayHeight);
-        textViewDisplayBloodGroup = (TextView) findViewById(R.id.idDisplayBloodGroup);
+//        textViewDisplayWeight = (TextView) findViewById(R.id.idDisplayWeight);
+//        textViewDisplayHeight = (TextView) findViewById(R.id.idDisplayHeight);
+//        textViewDisplayBloodGroup = (TextView) findViewById(R.id.idDisplayBloodGroup);
 
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
@@ -77,11 +78,9 @@ public class ProfileActivity extends AppCompatActivity {
                 textViewDisplayGuardianMobile.setText(currentUserDetails.getGuardianMobile());
                 textViewDisplayDoctorName.setText(currentUserDetails.getDoctorName());
                 textViewDisplayDoctorMobile.setText(currentUserDetails.getDoctorMobile());
+                textViewDisplayDoctorEmail.setText(currentUserDetails.getDoctorEmail());
                 textViewDisplayGender.setText(currentUserDetails.getGender());
                 textViewDisplayDOB.setText(currentUserDetails.getDob());
-                textViewDisplayWeight.setText(currentUserDetails.getWeight());
-                textViewDisplayHeight.setText(currentUserDetails.getHeight());
-                textViewDisplayBloodGroup.setText(currentUserDetails.getBloodGroup());
 
             }
 

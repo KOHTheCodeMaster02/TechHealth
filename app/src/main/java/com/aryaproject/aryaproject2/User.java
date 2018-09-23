@@ -3,14 +3,14 @@ package com.aryaproject.aryaproject2;
 public class User {
 
 
-    String name, dob, gender, bloodGroup, height, weight, patientMobile, email, guardianName, guardianMobile, guardianEmail;
+    String name, age, gender, bloodGroup, height, weight, patientMobile, email, guardianName, guardianMobile, guardianEmail;
     String doctorName, doctorMobile, doctorEmail;
 
     public User(String name, String age, String gender,
                 String patientMobile, String email, String guardianName, String guardianMobile,
                 String guardianEmail, String doctorName, String doctorMobile, String doctorEmail) {
         this.name = name;
-        this.dob = dob;
+        this.age = age;
         this.gender = gender;
         this.bloodGroup = bloodGroup;
         this.height = height;
@@ -29,13 +29,13 @@ public class User {
 
     }
 
-    public User(String name, String patientMobile, String email, String guardianName, String guardianMobile, String dob, String gender) {
+    public User(String name, String patientMobile, String email, String guardianName, String guardianMobile, String age, String gender) {
         this.name = name;
         this.patientMobile = patientMobile;
         this.email = email;
         this.guardianName = guardianName;
         this.guardianMobile = guardianMobile;
-        this.dob = dob;
+        this.age = age;
         this.gender = gender;
 
     }
@@ -50,7 +50,7 @@ public class User {
     }
 
     public String getDob() {
-        return dob;
+        return age;
     }
 
     public String getPatientMobile() {
