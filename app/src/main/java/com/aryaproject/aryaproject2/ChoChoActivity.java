@@ -96,6 +96,49 @@ public class ChoChoActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(gEmail).matches()){
+            editTextGuardianEmail.setError("Please Enter a valid Email!");
+            editTextGuardianEmail.requestFocus();
+            return;
+        }
+        if(gEmail.isEmpty()){
+            editTextGuardianEmail.setError("Email can not be Empty!");
+            editTextGuardianEmail.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(dEmail).matches()){
+            editTextDoctorEmail.setError("Please Enter a valid Email!");
+            editTextDoctorEmail.requestFocus();
+            return;
+        }
+        if(dEmail.isEmpty()){
+            editTextDoctorEmail.setError("Email can not be Empty!");
+            editTextDoctorEmail.requestFocus();
+            return;
+        }
+
+
+        if(pMobile.length() < 10){
+            editTextPatientMobile.setError("Number can't be less than 10 Digits!");
+            editTextPatientMobile.requestFocus();
+            return;
+        }
+        if(dMobile.length() < 10){
+            editTextDoctorMobile.setError("Number can't be less than 10 Digits!");
+            editTextDoctorMobile.requestFocus();
+            return;
+        }
+        if(gMobile.length() < 10){
+            editTextGuardianMobile.setError("Number can't be less than 10 Digits!");
+            editTextGuardianMobile.requestFocus();
+            return;
+        }
+
+
+
 //        progressBar.setVisibility(View.VISIBLE);
 
 
@@ -121,6 +164,7 @@ public class ChoChoActivity extends AppCompatActivity implements View.OnClickLis
 
                     HomePageActivity.eEmail = email;
                     HomePageActivity.Gender = gender;
+                    HomePageActivity.Age = age;
 
                     Intent intent = new Intent(ChoChoActivity.this, HomePageActivity.class);
                     //intent.putExtra("currentUserHashId", currentUserHashID);

@@ -112,16 +112,16 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         currentFileName = ashwinDate();
 
-        koh2();
-        koh3();
+//        koh2();
+//        koh3();
 
 //        edit_ml_run();
 //        upload_ml_run();
 
-        update4MajorFiles();
-        //perfectTesterByKoh();
+//        update4MajorFiles();
+        perfectTesterByKoh();
 
-
+        msg1();
 
     }
     //  Upload Gender.txt
