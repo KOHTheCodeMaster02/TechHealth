@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,7 +48,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     static String eEmail = "no email";
     static String currentUserHashId = "not assigned yet.";
-
+    static String DOB = "not assigned yet.";
+    static String Gender = "not assigned yet.";
+    static String Age = "not assigned yet.";
+    static User currentUser = null;
     File ml_run_File;
 
     {
@@ -63,6 +71,31 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.idButtonViewProfile).setOnClickListener(this);
         findViewById(R.id.idButtonViewHealthReport).setOnClickListener(this);
 
+//        koh2();
+        //  Upload Gender.
+        DatabaseReference firebaseRef;
+        firebaseRef = FirebaseDatabase.getInstance()
+                .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
+                        HomePageActivity.currentUserHashId);
+
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(User.class);
+                HomePageActivity.DOB = currentUser.getDob();
+                HomePageActivity.Gender = currentUser.getGender();
+
+//                textViewDisplayPatientName.setText(currentUserDetails.getName());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private void sync1() throws IOException {
@@ -75,12 +108,42 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
         currentFileName = ashwinDate();
 
+        koh2();
+
 //        edit_ml_run();
 //        upload_ml_run();
 
         update4MajorFiles();
         //perfectTesterByKoh();
 
+
+
+    }
+
+    private void koh2() throws IOException {
+
+        writeToAnyFile(HomePageActivity.Age, "gender.txt");
+        readFromAnyFile("gender.txt");
+        uploadAnyFile("temp", "gender", ".txt");
+
+    }
+
+    // age
+    private int getAge(int year, int month, int day){
+
+        Date now = new Date();
+        int nowMonth = now.getMonth() + 1;
+        int nowYear = now.getYear() + 1900;
+        int result = nowYear - year;
+
+        if( month > nowMonth )
+            result--;
+        else if( month == nowMonth ){
+            int nowDay = now.getDate();
+            if(day > nowDay)
+                result--;
+        }
+        return result;
     }
 
     //  4 Major Important Functions!!!
