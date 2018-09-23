@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseAuth mAuth;
     private String tempEmail = "abc@a.com";
+    static String gender = "F";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 //                    Log.d("status", "Current User ID: | " + id + " |");
 
-                    User user = new User(pName, pMobile, email, gName, gMobile, dob);
+                    User user = new User(pName, pMobile, email, gName, gMobile, dob, SignUpActivity.gender);
                     databaseUser.child(ashwin(email)).setValue(user);
 
                     HomePageActivity.currentUserHashId = ashwin(email);
@@ -111,6 +112,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Toast.LENGTH_SHORT).show();
 
                     HomePageActivity.eEmail = email;
+                    HomePageActivity.Gender = SignUpActivity.gender;
 
                     Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
                     //intent.putExtra("currentUserHashId", currentUserHashID);

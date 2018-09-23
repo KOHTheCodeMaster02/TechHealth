@@ -71,6 +71,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.idButtonViewProfile).setOnClickListener(this);
         findViewById(R.id.idButtonViewHealthReport).setOnClickListener(this);
 
+        HomePageActivity.Gender = "F";
+
 //        koh2();
         //  Upload Gender.
         DatabaseReference firebaseRef;
@@ -82,9 +84,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(User.class);
-                HomePageActivity.DOB = currentUser.getDob();
-                HomePageActivity.Gender = currentUser.getGender();
-
+//                HomePageActivity.DOB = currentUser.getDob();
+//                HomePageActivity.Gender = currentUser.getGender();
+                  HomePageActivity.Gender = "F";
 //                textViewDisplayPatientName.setText(currentUserDetails.getName());
 
             }
@@ -122,7 +124,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
     private void koh2() throws IOException {
 
-        writeToAnyFile(HomePageActivity.Age, "gender.txt");
+        writeToAnyFile(HomePageActivity.Gender, "gender.txt");
         readFromAnyFile("gender.txt");
         uploadAnyFile("temp", "gender", ".txt");
 

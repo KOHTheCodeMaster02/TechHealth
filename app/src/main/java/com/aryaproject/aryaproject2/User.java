@@ -29,13 +29,14 @@ public class User {
 
     }
 
-    public User(String name, String patientMobile, String email, String guardianName, String guardianMobile, String dob) {
+    public User(String name, String patientMobile, String email, String guardianName, String guardianMobile, String dob, String gender) {
         this.name = name;
         this.patientMobile = patientMobile;
         this.email = email;
         this.guardianName = guardianName;
         this.guardianMobile = guardianMobile;
         this.dob = dob;
+        this.gender = gender;
 
     }
 
