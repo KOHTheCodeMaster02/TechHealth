@@ -50,6 +50,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     static String currentUserHashId = "not assigned yet.";
     static String DOB = "not assigned yet.";
     static String Gender = "not assigned yet.";
+    //static String DOB = "18-01-1998";
     static String Age = "not assigned yet.";
     static User currentUser = null;
     File ml_run_File;
@@ -72,6 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.idButtonViewHealthReport).setOnClickListener(this);
 
         HomePageActivity.Gender = "F";
+        HomePageActivity.Age = "60";
 
 //        koh2();
         //  Upload Gender.
@@ -111,6 +113,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         currentFileName = ashwinDate();
 
         koh2();
+        koh3();
 
 //        edit_ml_run();
 //        upload_ml_run();
@@ -121,12 +124,20 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
-
+    //  Upload Gender.txt
     private void koh2() throws IOException {
 
         writeToAnyFile(HomePageActivity.Gender, "gender.txt");
         readFromAnyFile("gender.txt");
         uploadAnyFile("temp", "gender", ".txt");
+
+    }
+    //  Upload Age.txt
+    private void koh3() throws IOException {
+
+        writeToAnyFile(HomePageActivity.Age, "age.txt");
+        readFromAnyFile("age.txt");
+        uploadAnyFile("temp", "age", ".txt");
 
     }
 
