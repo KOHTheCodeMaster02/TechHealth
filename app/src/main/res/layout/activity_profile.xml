@@ -1,11 +1,12 @@
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/back"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -13,7 +14,6 @@
             android:layout_width="100dp"
             android:layout_height="76dp"
 
-            android:scrollbars = "vertical"
             android:layout_gravity="center|top"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -21,12 +21,13 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/profile"/>
+            android:scrollbars="vertical"
+            android:src="@drawable/profile" />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:scrollbars="vertical"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -34,6 +35,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:scrollbars="vertical"
             android:text="PROFILE"
             android:textStyle="italic|bold" />
 
@@ -465,20 +467,20 @@
 
 
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:id="@+id/hsta"
             android:layout_width="0dp"
             android:layout_height="20dp"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/cardview_compat_inset_shadow"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:scrollbars="vertical"
-            android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp">
-
+            android:layout_marginTop="8dp"
+            android:scrollbars="vertical">
 
 
         </android.support.v7.widget.CardView>
