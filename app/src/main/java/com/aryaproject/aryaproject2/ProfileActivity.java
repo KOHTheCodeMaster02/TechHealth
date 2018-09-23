@@ -16,12 +16,18 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference firebaseRef;
     TextView textViewDisplayPatientName;
     TextView textViewDisplayPatientEmail;
-/*
-    TextView textViewDisplayEmail;
-    TextView textViewDisplayEmail;
-    TextView textViewDisplayEmail;
-    TextView textViewDisplayEmail;
-*/
+    TextView textViewDisplayPatientMobile;
+    TextView textViewDisplayGuardianName;
+    TextView textViewDisplayGuardianEmail;
+    TextView textViewDisplayGuardianMobile;
+    TextView textViewDisplayDOB;
+    TextView textViewDisplayDoctorName;
+    TextView textViewDisplayDoctorMobile;
+    TextView textViewDisplayDoctorEmail;
+    TextView textViewDisplayGender;
+    TextView textViewDisplayBloodGroup;
+    TextView textViewDisplayWeight;
+    TextView textViewDisplayHeight;
     private User currentUserDetails;
 
     // Parameters:
@@ -32,8 +38,19 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-//        textViewDisplayPatientEmail = (TextView) findViewById(R.id.idDisplayPatientEmail);
+        textViewDisplayPatientEmail = (TextView) findViewById(R.id.idDisplayPatientEmail);
         textViewDisplayPatientName = (TextView) findViewById(R.id.idDisplayPatientName);
+        textViewDisplayPatientMobile = (TextView) findViewById(R.id.idDisplayPatientMobile);
+        textViewDisplayGuardianEmail = (TextView) findViewById(R.id.idDisplayGuardianEmail);
+        textViewDisplayGuardianName = (TextView) findViewById(R.id.idDisplayGuardianName);
+        textViewDisplayGuardianMobile = (TextView) findViewById(R.id.idDisplayGuardianMobile);
+        textViewDisplayDoctorName = (TextView) findViewById(R.id.idDisplayDoctorName);
+        textViewDisplayDoctorMobile = (TextView) findViewById(R.id.idDisplayDoctorMobile);
+        textViewDisplayGender = (TextView) findViewById(R.id.idDisplayGender);
+        textViewDisplayDOB = (TextView) findViewById(R.id.idDisplayDob);
+        textViewDisplayWeight = (TextView) findViewById(R.id.idDisplayWeight);
+        textViewDisplayHeight = (TextView) findViewById(R.id.idDisplayHeight);
+        textViewDisplayBloodGroup = (TextView) findViewById(R.id.idDisplayBloodGroup);
 
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
@@ -51,12 +68,21 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUserDetails = dataSnapshot.getValue(User.class);
-//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
                 textViewDisplayPatientName.setText(currentUserDetails.getName());
-//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
-//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
-//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
-//                textViewDisplayPatientEmail.setText(currentUserDetails.getEmail());
+                textViewDisplayPatientEmail.setText(currentUserDetails.getEmail());
+                textViewDisplayPatientMobile.setText(currentUserDetails.getPatientMobile());
+
+                textViewDisplayGuardianName.setText(currentUserDetails.getGuardianName());
+                textViewDisplayGuardianEmail.setText(currentUserDetails.getGuardianEmail());
+                textViewDisplayGuardianMobile.setText(currentUserDetails.getGuardianMobile());
+                textViewDisplayDoctorName.setText(currentUserDetails.getDoctorName());
+                textViewDisplayDoctorMobile.setText(currentUserDetails.getDoctorMobile());
+                textViewDisplayGender.setText(currentUserDetails.getGender());
+                textViewDisplayDOB.setText(currentUserDetails.getDob());
+                textViewDisplayWeight.setText(currentUserDetails.getWeight());
+                textViewDisplayHeight.setText(currentUserDetails.getHeight());
+                textViewDisplayBloodGroup.setText(currentUserDetails.getBloodGroup());
+
             }
 
             @Override

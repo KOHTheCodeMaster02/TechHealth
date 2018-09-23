@@ -39,12 +39,6 @@
             android:text="PROFILE"
             android:textStyle="italic|bold" />
 
-        <TextView
-            android:id="@+id/idTextViewDisplayEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
         <android.support.v7.widget.CardView
             android:layout_width="250dp"
             android:layout_height="50dp"
@@ -438,7 +432,7 @@
             android:scrollbars="vertical">
 
             <TextView
-                android:id="@+id/idDisplayCurrentHealthStatus"
+                android:id="@+id/idDisplayDoctorEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -448,11 +442,10 @@
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:src="@drawable/heza" />
+                android:src="@drawable/g" />
 
 
         </android.support.v7.widget.CardView>
-
         <android.support.v7.widget.CardView
             android:id="@+id/hsta"
             android:layout_width="0dp"
