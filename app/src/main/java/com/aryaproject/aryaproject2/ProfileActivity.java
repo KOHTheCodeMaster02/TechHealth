@@ -14,7 +14,14 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
 
     DatabaseReference firebaseRef;
+    TextView textViewDisplayPatientName;
+    TextView textViewDisplayPatientEmail;
+/*
     TextView textViewDisplayEmail;
+    TextView textViewDisplayEmail;
+    TextView textViewDisplayEmail;
+    TextView textViewDisplayEmail;
+*/
     private User currentUserDetails;
 
     // Parameters:
@@ -25,7 +32,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        textViewDisplayEmail = (TextView) findViewById(R.id.idTextViewDisplayEmail);
+//        textViewDisplayPatientEmail = (TextView) findViewById(R.id.idDisplayPatientEmail);
+        textViewDisplayPatientName = (TextView) findViewById(R.id.idDisplayPatientName);
 
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
@@ -43,7 +51,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUserDetails = dataSnapshot.getValue(User.class);
-                textViewDisplayEmail.setText(currentUserDetails.getEmail());
+//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
+                textViewDisplayPatientName.setText(currentUserDetails.getName());
+//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
+//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
+//                textViewDisplayEmail.setText(currentUserDetails.getEmail());
+//                textViewDisplayPatientEmail.setText(currentUserDetails.getEmail());
             }
 
             @Override
