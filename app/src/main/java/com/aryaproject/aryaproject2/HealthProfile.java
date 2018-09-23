@@ -44,12 +44,14 @@ public class HealthProfile extends AppCompatActivity {
         temp = (TextView) findViewById(R.id.utemp);
         sys = (TextView) findViewById(R.id.bp);
         dia = (TextView) findViewById(R.id.ubp);
+        TextView editTextStatus = (TextView) findViewById(R.id.idHealth);
 
         try {
             chocho1("users/" + ashwin( HomePageActivity.eEmail) ) ;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        editTextStatus.setText(HealthProfile.status);
     }
 
     private void chocho1(String firebaseFolder) throws IOException {

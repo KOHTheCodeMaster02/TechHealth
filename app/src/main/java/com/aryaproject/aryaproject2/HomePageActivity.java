@@ -426,6 +426,22 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    private void readAnyR() {
+        int i = (int) (Math.random()*3);
+        String result = result1(i);
+        HealthProfile.status = result;
+    }
+
+    private String result1(int i) {
+
+        if (i == 0)
+            HealthProfile.status = "Healthy";
+        else if (i == 1)
+            HealthProfile.status = "Unhealthy";
+        else
+            HealthProfile.status = "Mildly Unhealthy";
+        return HealthProfile.status;
+    }
 
     // ------------------------------------------
     //  Download File Working.
@@ -517,10 +533,12 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, ProfileActivity.class));
                 break;
             case R.id.idButtonViewHealthReport:
+                readAnyR();
                 startActivity(new Intent(this, HealthProfile.class));
                 break;
         }
     }
+
 
 
 }
