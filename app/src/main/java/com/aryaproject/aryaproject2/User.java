@@ -52,6 +52,9 @@ public class User {
     public String getDob() {
         return age;
     }
+    public String getAge() {
+        return age;
+    }
 
     public String getPatientMobile() {
         return patientMobile;

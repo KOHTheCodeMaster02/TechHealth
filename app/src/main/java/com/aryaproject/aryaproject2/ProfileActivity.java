@@ -20,7 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView textViewDisplayGuardianName;
     TextView textViewDisplayGuardianEmail;
     TextView textViewDisplayGuardianMobile;
-    TextView textViewDisplayDOB;
+    TextView textViewDisplayAge;
     TextView textViewDisplayDoctorName;
     TextView textViewDisplayDoctorMobile;
     TextView textViewDisplayDoctorEmail;
@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         textViewDisplayDoctorMobile = (TextView) findViewById(R.id.idDisplayDoctorMobile);
         textViewDisplayDoctorEmail = (TextView) findViewById(R.id.idDisplayDoctorEmail);
         textViewDisplayGender = (TextView) findViewById(R.id.idDisplayGender);
-        textViewDisplayDOB = (TextView) findViewById(R.id.idDisplayDob);
+        textViewDisplayAge = (TextView) findViewById(R.id.idDisplayAge);
 //        textViewDisplayWeight = (TextView) findViewById(R.id.idDisplayWeight);
 //        textViewDisplayHeight = (TextView) findViewById(R.id.idDisplayHeight);
 //        textViewDisplayBloodGroup = (TextView) findViewById(R.id.idDisplayBloodGroup);
@@ -80,7 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
                 textViewDisplayDoctorMobile.setText(currentUserDetails.getDoctorMobile());
                 textViewDisplayDoctorEmail.setText(currentUserDetails.getDoctorEmail());
                 textViewDisplayGender.setText(currentUserDetails.getGender());
-                textViewDisplayDOB.setText(currentUserDetails.getDob());
+                textViewDisplayAge.setText(currentUserDetails.getAge());
 
             }
 

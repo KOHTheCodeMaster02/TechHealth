@@ -24,7 +24,7 @@ public class AgeAndGender extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         textViewDisplayGender = (TextView) findViewById(R.id.idDisplayGender);
-        textViewDisplayDOB = (TextView) findViewById(R.id.idDisplayDob);
+        textViewDisplayDOB = (TextView) findViewById(R.id.idDisplayAge);
 
         firebaseRef = FirebaseDatabase.getInstance()
                 .getReferenceFromUrl("https://aryaproject2-7252e.firebaseio.com/Users/" +
