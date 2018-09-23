@@ -6,7 +6,7 @@ public class User {
     String name, dob, gender, bloodGroup, height, weight, patientMobile, email, guardianName, guardianMobile, guardianEmail;
     String doctorName, doctorMobile, doctorEmail;
 
-    public User(String name, String dob, String gender, String bloodGroup, String height, String weight,
+    public User(String name, String age, String gender,
                 String patientMobile, String email, String guardianName, String guardianMobile,
                 String guardianEmail, String doctorName, String doctorMobile, String doctorEmail) {
         this.name = name;

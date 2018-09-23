@@ -1,0 +1,363 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/back">
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hsta"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:scrollbars="vertical">
+
+
+            <EditText
+                android:id="@+id/idPName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="NAME"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/dob1"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Age"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/gender"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Gender"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/call"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idPMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Phone number"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/email"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idPEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="E-mail"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/guar"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idGName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Guardian Name"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/guarcontact"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idGMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Guardian Contact"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/guaremail"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idGEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Guardian Email"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctorname"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idDoctorName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Doctor's Name"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctoc"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idDoctorMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Doctor Contact"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/dpassc"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idDoctorEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Doctor Email"
+                android:inputType="textPersonName" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/dob"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/cardview_compat_inset_shadow"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+
+            <EditText
+                android:id="@+id/idPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+        </android.support.v7.widget.CardView>
+
+        <!--
+     <android.support.v7.widget.CardView
+         android:id="@+id/hstba"
+         android:layout_width="0dp"
+         android:layout_height="20dp"
+         android:layout_margin="@dimen/cardview_compat_inset_shadow"
+         android:layout_marginBottom="8dp"
+         android:layout_marginEnd="8dp"
+         android:scrollbars="vertical"
+         android:layout_gravity="center"
+         android:layout_marginLeft="8dp"
+         android:layout_marginRight="8dp"
+         android:layout_marginStart="8dp"
+         android:layout_marginTop="8dp">
+<ProgressBar
+             android:id="@+id/idSignUpProgressBar"
+             style="?android:attr/progressBarStyle"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="8dp"
+             android:layout_marginLeft="8dp"
+             android:layout_marginRight="8dp"
+             android:layout_marginStart="8dp"
+             android:layout_marginTop="8dp"
+             android:visibility="gone"
+             app:layout_constraintBottom_toTopOf="@+id/idSignUpBtn"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.501"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/idEditTextPassword"
+             app:layout_constraintVertical_bias="0.775" />
+
+
+     </android.support.v7.widget.CardView>
+-->
+        <Button
+            android:id="@+id/idSubmitBtn"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+
+        <TextView
+            android:id="@+id/idAlreadyHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center|top"
+            android:text="Already have an account"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

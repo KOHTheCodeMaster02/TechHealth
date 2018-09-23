@@ -22,7 +22,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HomePageActivity" />
-        <activity android:name=".HealthProfile"></activity>
+        <activity android:name=".HealthProfile" />
+        <activity android:name=".ChoChoActivity"></activity>
     </application>
 
 </manifest>

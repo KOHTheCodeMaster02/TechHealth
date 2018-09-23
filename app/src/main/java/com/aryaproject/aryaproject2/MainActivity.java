@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.idTextViewSignUp:
 
-                startActivity(new Intent(this, SignUpActivity.class));
+                startActivity(new Intent(this, ChoChoActivity.class));
                 break;
             case R.id.idLoginBtn:
                 userLogin();
